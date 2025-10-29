@@ -1,16 +1,9 @@
-# License (CC BY-SA 4.0)
+MIT License
 
-This work is released under the Creative Commons Attribution-ShareAlike 4.0 International license (https://creativecommons.org/licenses/by-sa/4.0/).
+Copyright (c) 2025 Jens Leicht and Olga Filipova
 
-#### This means that you are free to:
-- SHARE: copy and redistribute the icons in any medium or format
-- ADAPT: remix, transform, and build upon the icon set (e.g., edit the color, size, elements) for any purpose, even for commercial purposes.
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-#### Under the following terms:
-- ATTRIBUTION: You must give appropriate credit to the original creators of the icon set, as well as us (see below), provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-- SHARE ALIKE: If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.
-
-## How to Cite
-
-`Leicht Jens and Heisel Maritta, Extending PriPoCoG: A Privacy Policy Editor for GDPR-Compliant Privacy Policies, 19th International Conference on Evaluation of Novel Approaches to Software Engineering, 2024, doi: 10.5220/0012599600003687`
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
