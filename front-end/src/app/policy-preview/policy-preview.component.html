@@ -1,0 +1,1052 @@
+<div class="content">
+    <div>
+      <div class="top">
+        <div class="header">
+          <h2 class="text">
+            LPL policy preview
+          </h2>
+        </div>
+        
+        <mat-card class="form">
+          
+              <ul>
+                <ng-template #recursiveTree let-list>
+                  <li *ngFor="let item of list, let t = index"> 
+                    <button class="elv-header" (click)="viewList('LPP', t)" [class.elv-header-selected]="show('LPP', t)">Privacy policy {{item.name}}:</button> 
+                    <div *ngIf="show('LPP', t)">
+                                                   
+                            <button class="elv-header" (click)="viewList('HEAD', t)" [class.elv-header-selected]="show('HEAD', t)">HEAD:</button> 
+                            <div *ngIf="show('HEAD', t)">
+                                <div *ngFor="let head of item.HEADER, let i = index">
+                                    <div [@openClose]="show('HEAD', t) ? 'open' : 'closed'" class="elv-section">
+
+                                        <button class="elv-header" (click)="viewListEl('H', t, i)" [class.elv-header-selected]="showEl('H', t, i)">{{i}}:</button> 
+                                        <div *ngIf="showEl('H', t, i)">
+                                            <div [@openClose]="showEl('H', t, i) ? 'open' : 'closed'" class="elv-section">
+                                                <div> lang: {{head.lang}}</div>
+                                                <div> value: {{head.value}}</div>
+                                            </div>
+                                        </div>  
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="elv-header" (click)="viewList('DESC', t)" [class.elv-header-selected]="show('DESC', t)">DESC:</button> 
+                            <div *ngIf="show('DESC', t)">
+                                <div *ngFor="let desc of item.DESCRIPTION, let i = index">
+                                    <div [@openClose]="show('DESC', t) ? 'open' : 'closed'" class="elv-section">
+                                        <button class="elv-header" (click)="viewListEl('D', t, i)" [class.elv-header-selected]="showEl('D', t, i)">{{i}}:</button> 
+                                        <div *ngIf="showEl('D', t, i)">
+                                            <div [@openClose]="showEl('D', t, i) ? 'open' : 'closed'" class="elv-section">
+                                                <div> lang: {{desc.lang}}</div>
+                                                <div> value: {{desc.value}}</div> 
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="elv-headerEl">version: {{item.version}}</button> 
+                            <button class="elv-headerEl">name: {{item.name}}</button> 
+                            <button class="elv-headerEl">lang: {{item.lang}}</button> 
+                            <button class="elv-headerEl">privacyPolicyUri: {{item.privacyPolicyUri}}</button> 
+
+                            <!-- <button class="elv-header" (click)="viewList('ICONS', t)" [class.elv-header-selected]="show('ICONS', t)">iconList:</button> 
+                            <div *ngIf="show('ICONS', t)">
+                                <div *ngFor="let ic of item.iconList, let i = index">
+                                    <div [@openClose]="show('ICONS', t) ? 'open' : 'closed'" class="elv-section">
+
+                                        <button class="elv-header" (click)="viewListEl('ICONS', t, i)" [class.elv-header-selected]="showEl('ICONS', t, i)">{{i}}:</button> 
+                                        <div *ngIf="showEl('ICONS', t, i)">
+                                            <div [@openClose]="showEl('ICONS', t, i) ? 'open' : 'closed'" class="elv-section">
+
+                                                <button class="elv-headerEl">name: {{ic.icon.name}}</button> 
+
+                                                <button class="elv-header" (click)="viewListEl('IHEAD', t, i)" [class.elv-header-selected]="showEl('IHEAD', t, i)">HEAD:</button> 
+                                                <div *ngIf="showEl('IHEAD', t, i)">
+                                                    <div [@openClose]="showEl('IHEAD', t, i) ? 'open' : 'closed'" class="elv-section">
+                                                        <div *ngFor="let head of ic.icon.HEAD, let j = index">
+                                                            <button class="elv-header" (click)="viewElvList('IHEAD', t, i, j)" [class.elv-header-selected]="showElv('IHEAD', t, i, j)">{{j}}:</button> 
+                                                            <div *ngIf="showElv('IHEAD', t, i, j)">
+                                                                <div [@openClose]="showElv('IHEAD', t, i, j) ? 'open' : 'closed'" class="elv-section">  
+                                                                    <div> lang: {{head.lang}}</div>
+                                                                    <div> value: {{head.value}}</div> 
+                                                                </div>
+                                                            </div> 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            
+                                                <button class="elv-header" (click)="viewListEl('IDESC', t, i)" [class.elv-header-selected]="showEl('IDESC', t, i)">DESC:</button> 
+                                                <div *ngIf="showEl('IDESC', t, i)">
+                                                    <div [@openClose]="showEl('IDESC', t, i) ? 'open' : 'closed'" class="elv-section">
+                                                        <div *ngFor="let desc of ic.icon.DESC, let j = index">
+                                                            <button class="elv-header" (click)="viewElvList('IDESC', t, i, j)" [class.elv-header-selected]="showElv('IDESC', t, i, j)">{{j}}:</button> 
+                                                            <div *ngIf="showElv('IDESC', t, i, j)">
+                                                                <div [@openClose]="showElv('IDESC', t, i, j) ? 'open' : 'closed'" class="elv-section">  
+                                                                    <div> lang: {{desc.lang}}</div>
+                                                                    <div> value: {{desc.value}}</div>   
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>        
+                                    </div>
+                                </div>
+                            </div> -->
+
+                            <button class="elv-header" (click)="viewList('P', t)" [class.elv-header-selected]="show('P', t)">purposeList:</button> 
+                            <div *ngIf="show('P', t)">
+                                <div *ngFor="let p of item.purposeList, let i = index">
+                                    <div [@openClose]="show('P', t) ? 'open' : 'closed'" class="elv-section">
+
+                                        <button class="elv-header" (click)="viewListEl('P', t, i)" [class.elv-header-selected]="showEl('P', t, i)">{{i}}:</button> 
+                                        <div *ngIf="showEl('P', t, i)">
+                                            <div [@openClose]="showEl('P', t, i) ? 'open' : 'closed'" class="elv-section">
+
+                                                <button class="elv-header" (click)="viewListEl('PH', t, i)" [class.elv-header-selected]="showEl('PH', t, i)">HEAD:</button> 
+                                                <div *ngIf="showEl('PH', t, i)">
+                                                    <div [@openClose]="showEl('PH', t, i) ? 'open' : 'closed'" class="elv-section">
+                                                        <div *ngFor="let head of p.HEAD, let j = index">
+                                                            <button class="elv-header" (click)="viewElvList('PHEAD', t, i, j)" [class.elv-header-selected]="showElv('PHEAD', t, i, j)">{{j}}:</button> 
+                                                                <div *ngIf="showElv('PHEAD', t, i, j)">
+                                                                    <div [@openClose]="showElv('PHEAD', t, i, j) ? 'open' : 'closed'" class="elv-section">  
+                                                                        <div> lang: {{head.lang}}</div>
+                                                                        <div> value: {{head.value}}</div> 
+                                                                    </div>
+                                                                </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <button class="elv-header" (click)="viewListEl('PD', t, i)" [class.elv-header-selected]="showEl('PD', t, i)">DESC:</button> 
+                                                <div *ngIf="showEl('PD', t, i)">
+                                                    <div [@openClose]="showEl('PD', t, i) ? 'open' : 'closed'" class="elv-section">
+                                                        <div *ngFor="let desc of p.DESC, let j = index"> 
+                                                            <button class="elv-header" (click)="viewElvList('PDESC', t, i, j)" [class.elv-header-selected]="showElv('PDESC', t, i, j)">{{j}}:</button> 
+                                                                <div *ngIf="showElv('PDESC', t, i, j)">
+                                                                    <div [@openClose]="showElv('PDESC', t, i, j) ? 'open' : 'closed'" class="elv-section"> 
+                                                                        <div> lang: {{desc.lang}}</div>
+                                                                        <div> value: {{desc.value}}</div>
+                                                                    </div>
+                                                                </div>  
+                                                        </div>
+                                                    </div>
+                                                </div> 
+
+                                                <button class="elv-headerEl">name: {{p.name}}</button> 
+
+                                                <button class="elv-headerEl">optOut: {{p.optOut}}</button> 
+                                                <button class="elv-headerEl">required: {{p.required}}</button> 
+
+
+                                                <button class="elv-header" (click)="viewListEl('PDRL', t, i)" [class.elv-header-selected]="showEl('PDRL', t, i)">dataRecipientList:</button> 
+                                                <div *ngIf="showEl('PDRL', t, i)">
+                                                    <div [@openClose]="showEl('PDRL', t, i) ? 'open' : 'closed'" class="elv-section">
+
+                                                        <div *ngFor="let drl of p.dataRecipientList, let j = index">
+                                                            <button class="elv-header" (click)="viewElvList('PDR', t, i, j)" [class.elv-header-selected]="showElv('PDR', t, i, j)">{{j}}:</button> 
+                                                                <div *ngIf="showElv('PDR', t, i, j)">
+                                                                    <div [@openClose]="showElv('PDR', t, i, j) ? 'open' : 'closed'" class="elv-section"> 
+                                                                    
+                                                                        <button class="elv-header" (click)="viewElvList('PDRH', t, i, j)" [class.elv-header-selected]="showElv('PDRH', t, i, j)">HEAD:</button> 
+                                                                            <div *ngIf="showElv('PDRH', t, i, j)">
+                                                                                <div [@openClose]="showElv('PDRH', t, i, j) ? 'open' : 'closed'" class="elv-section"> 
+                                                                    
+                                                                                    <div *ngFor="let head of drl.HEAD, let k = index">
+                                                                                        <button class="elv-header" (click)="viewElvSubList('PDRHEAD', t, i, j, k)" [class.elv-header-selected]="showSubElv('PDRHEAD', t, i, j, k)">{{k}}:</button> 
+                                                                                        <div *ngIf="showSubElv('PDRHEAD', t, i, j, k)">
+                                                                                            <div [@openClose]="showSubElv('PDRHEAD', t, i, j, k) ? 'open' : 'closed'" class="elv-section">             
+                                                                                                <div> lang: {{head.lang}}</div>
+                                                                                                <div> value: {{head.value}}</div>  
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
+                                        
+                                                                            <button class="elv-header" (click)="viewElvList('PDRD', t, i, j)" [class.elv-header-selected]="showElv('PDRD', t, i, j)">DESC:</button> 
+                                                                            <div *ngIf="showElv('PDRD', t, i, j)">
+                                                                                <div [@openClose]="showElv('PDRD', t, i, j) ? 'open' : 'closed'" class="elv-section"> 
+                                                                    
+                                                                                    <div *ngFor="let desc of drl.DESC, let k = index">
+                                                                                        <button class="elv-header" (click)="viewElvSubList('PDRDESC', t, i, j, k)" [class.elv-header-selected]="showSubElv('PDRDESC', t, i, j, k)">{{k}}:</button> 
+                                                                                        <div *ngIf="showSubElv('PDRDESC', t, i, j, k)">  
+                                                                                            <div [@openClose]="showSubElv('PDRDESC', t, i, j, k) ? 'open' : 'closed'" class="elv-section">             
+                                                                                                <div> lang: {{desc.lang}}</div>
+                                                                                                <div> value: {{desc.value}}</div>  
+                                                                                            </div> 
+                                                                                        </div>
+                                                                                    </div>
+
+                                                                                </div>
+                                                                            </div>
+
+                                                                        <button class="elv-headerEl">name: {{drl.name}} </button> 
+                                                                        <button class="elv-headerEl">authInfo: {{drl.authInfo}} </button> 
+                                                                        <button class="elv-headerEl">classification: {{drl.classification}} </button> 
+                                                                        <button class="elv-headerEl">type: {{drl.type}} </button> 
+                                                                        <button class="elv-headerEl">required: {{drl.required}} </button> 
+                                                                        <button class="elv-headerEl">thirdCountryTransfer: {{drl.thirdCountryTransfer}} </button> 
+                                                                        <button class="elv-headerEl">country: {{drl.country}} </button> 
+                                                                        <button class="elv-headerEl">adequacyDecision: {{drl.adequacyDecision}} </button> 
+
+                                                                        <button class="elv-header" (click)="viewElvList('PDRDSG', t, i, j)" [class.elv-header-selected]="showElv('PDRDSG', t, i, j)">safeguardList:</button> 
+                                                                        <div *ngIf="showElv('PDRDSG', t, i, j)">
+                                                                            <div [@openClose]="showElv('PDRDSG', t, i, j) ? 'open' : 'closed'" class="elv-section"> 
+
+                                                                                <div *ngFor="let sg of drl.safeguardList, let k = index">
+                                                                                    <button class="elv-header" (click)="viewElvSubList('SG', t, i, j, k)" [class.elv-header-selected]="showSubElv('SG', t, i, j, k)">{{k}}:</button> 
+                                                                                    <div *ngIf="showSubElv('SG', t, i, j, k)">  
+                                                                                        <div [@openClose]="showSubElv('SG', t, i, j, k) ? 'open' : 'closed'" class="elv-section">
+
+                                                                                            <button class="elv-headerEl">name: {{sg.safeguard.name}}</button>
+
+                                                                                            <button class="elv-header" (click)="viewElvSubList('SGH', t, i, j, k)" [class.elv-header-selected]="showSubElv('SGH', t, i, j, k)">HEAD:</button> 
+                                                                                            <div *ngIf="showSubElv('SGH', t, i, j, k)">  
+                                                                                                <div [@openClose]="showSubElv('SGH', t, i, j, k) ? 'open' : 'closed'" class="elv-section">
+
+                                                                                                    <div *ngFor="let head of sg.safeguard.HEAD, let n = index">
+                                                                                                        <button class="elv-header" (click)="viewElvSubListEnd('SGHEAD', t, i, j, k, n)" [class.elv-header-selected]="showSubElvEnd('SGHEAD', t, i, j, k, n)">{{n}}:</button> 
+                                                                                                        <div *ngIf="showSubElvEnd('SGHEAD', t, i, j, k, n)">
+                                                                                                            <div [@openClose]="showSubElvEnd('SGHEAD', t, i, j, k, n) ? 'open' : 'closed'" class="elv-section">             
+                                                                                                                <div> lang: {{head.lang}}</div>
+                                                                                                                <div> value: {{head.value}}</div>  
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                </div>
+                                                                                            </div>
+                                                            
+                                                                                            <button class="elv-header" (click)="viewElvSubList('SGD', t, i, j, k)" [class.elv-header-selected]="showSubElv('SGD', t, i, j, k)">DESC:</button> 
+                                                                                            <div *ngIf="showSubElv('SGD', t, i, j, k)">  
+                                                                                                <div [@openClose]="showSubElv('SGD', t, i, j, k) ? 'open' : 'closed'" class="elv-section">
+
+                                                                                                    <div *ngFor="let desc of sg.safeguard.DESC, let n = index">
+                                                                                                        <button class="elv-header" (click)="viewElvSubListEnd('SGDESC', t, i, j, k, n)" [class.elv-header-selected]="showSubElvEnd('SGDESC', t, i, j, k, n)">{{n}}:</button> 
+                                                                                                        <div *ngIf="showSubElvEnd('SGDESC', t, i, j, k, n)">  
+                                                                                                            <div [@openClose]="showSubElvEnd('SGDESC', t, i, j, k, n) ? 'open' : 'closed'" class="elv-section">             
+                                                                                                                <div> lang: {{desc.lang}}</div>
+                                                                                                                <div> value: {{desc.value}}</div>  
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                        
+                                                                </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <button class="elv-header" (click)="viewListEl('PDD', t, i)" [class.elv-header-selected]="showEl('PDD', t, i)">dataList:</button> 
+                                                <div *ngIf="showEl('PDD', t, i)">
+                                                    <div [@openClose]="showEl('PDD', t, i) ? 'open' : 'closed'" class="elv-section">
+
+                                                        <div *ngFor="let dl of p.dataList, let j = index">
+                                                            <button class="elv-header" (click)="viewElvList('DL', t, i, j)" [class.elv-header-selected]="showElv('DL', t, i, j)">{{j}}:</button> 
+                                                                <div *ngIf="showElv('DL', t, i, j)">
+                                                                    <div [@openClose]="showElv('DL', t, i, j) ? 'open' : 'closed'" class="elv-section"> 
+                                                                    
+                                                                        <button class="elv-header" (click)="viewElvList('DLH', t, i, j)" [class.elv-header-selected]="showElv('DLH', t, i, j)">HEAD:</button> 
+                                                                        <div *ngIf="showElv('DLH', t, i, j)">
+                                                                            <div [@openClose]="showElv('DLH', t, i, j) ? 'open' : 'closed'" class="elv-section"> 
+                                                                    
+                                                                                <div *ngFor="let head of dl.HEAD, let k = index">
+                                                                                    <button class="elv-header" (click)="viewElvSubList('DLHEAD', t, i, j, k)" [class.elv-header-selected]="showSubElv('DLHEAD', t, i, j, k)">{{k}}:</button> 
+                                                                                    <div *ngIf="showSubElv('DLHEAD', t, i, j, k)">
+                                                                                        <div [@openClose]="showSubElv('DLHEAD', t, i, j, k) ? 'open' : 'closed'" class="elv-section">             
+                                                                                            <div> lang: {{head.lang}}</div>
+                                                                                            <div> value: {{head.value}}</div>  
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+                                        
+                                                                        <button class="elv-header" (click)="viewElvList('DLD', t, i, j)" [class.elv-header-selected]="showElv('DLD', t, i, j)">DESC:</button> 
+                                                                        <div *ngIf="showElv('DLD', t, i, j)">
+                                                                            <div [@openClose]="showElv('DLD', t, i, j) ? 'open' : 'closed'" class="elv-section"> 
+                                                                    
+                                                                                <div *ngFor="let desc of dl.DESC, let k = index">
+                                                                                    <button class="elv-header" (click)="viewElvSubList('DLDESC', t, i, j, k)" [class.elv-header-selected]="showSubElv('DLDESC', t, i, j, k)">{{k}}:</button> 
+                                                                                    <div *ngIf="showSubElv('DLDESC', t, i, j, k)">  
+                                                                                        <div [@openClose]="showSubElv('DLDESC', t, i, j, k) ? 'open' : 'closed'" class="elv-section">             
+                                                                                            <div> lang: {{desc.lang}}</div>
+                                                                                            <div> value: {{desc.value}}</div>  
+                                                                                        </div> 
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <button class="elv-headerEl">name: {{dl.name}}</button> 
+                                                                        <button class="elv-headerEl">required: {{dl.required}}</button> 
+                                                                        <button class="elv-headerEl">dataType: {{dl.dataType}}</button> 
+                                                                        <button class="elv-headerEl">privacyGroup: {{dl.privacyGroup}}</button> 
+
+                                                                        <button class="elv-header" (click)="viewElvList('ANM', t, i, j)" [class.elv-header-selected]="showElv('ANM', t, i, j)">anonymizationMethod:</button> 
+                                                                        <div *ngIf="showElv('ANM', t, i, j)">  
+                                                                            <div [@openClose]="showElv('ANM', t, i, j) ? 'open' : 'closed'" class="elv-section">             
+                                                                                <button class="elv-headerEl">name: {{dl.anonymizationMethod.name}}</button> 
+                                                                                <button class="elv-header" (click)="viewElvList('ANMH', t, i, j)" [class.elv-header-selected]="showElv('ANMH', t, i, j)">HEAD:</button> 
+                                                                                <div *ngIf="showElv('ANMH', t, i, j)">  
+                                                                                    <div [@openClose]="showElv('ANMH', t, i, j) ? 'open' : 'closed'" class="elv-section">             
+
+                                                                                        <div *ngFor="let head of dl.anonymizationMethod.HEAD, let k = index">
+                                                                                            <button class="elv-header" (click)="viewElvSubList('ANMHEAD', t, i, j, k)" [class.elv-header-selected]="showSubElv('ANMHEAD', t, i, j, k)">{{k}}:</button> 
+                                                                                            <div *ngIf="showSubElv('ANMHEAD', t, i, j, k)">
+                                                                                                <div [@openClose]="showSubElv('ANMHEAD', t, i, j, k) ? 'open' : 'closed'" class="elv-section">             
+                                                                                                    <div> lang: {{head.lang}}</div>
+                                                                                                    <div> value: {{head.value}}</div>  
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                
+                                                                                <button class="elv-header" (click)="viewElvList('ANMD', t, i, j)" [class.elv-header-selected]="showElv('ANMD', t, i, j)">DESC:</button> 
+                                                                                <div *ngIf="showElv('ANMD', t, i, j)">  
+                                                                                    <div [@openClose]="showElv('ANMD', t, i, j) ? 'open' : 'closed'" class="elv-section">             
+        
+                                                                                        <div *ngFor="let desc of dl.anonymizationMethod.DESC, let k = index">
+                                                                                            <button class="elv-header" (click)="viewElvSubList('ANMDESC', t, i, j, k)" [class.elv-header-selected]="showSubElv('ANMDESC', t, i, j, k)">{{k}}:</button> 
+                                                                                            <div *ngIf="showSubElv('ANMDESC', t, i, j, k)">  
+                                                                                                <div [@openClose]="showSubElv('ANMDESC', t, i, j, k) ? 'open' : 'closed'" class="elv-section">             
+                                                                                                    <div> lang: {{desc.lang}}</div>
+                                                                                                    <div> value: {{desc.value}}</div>  
+                                                                                                </div> 
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <button class="elv-header" (click)="viewElvList('ANMHE', t, i, j)" [class.elv-header-selected]="showElv('ANMHE', t, i, j)">hierarchyEntityList:</button> 
+                                                                                <div *ngIf="showElv('ANMHE', t, i, j)">  
+                                                                                    <div [@openClose]="showElv('ANMHE', t, i, j) ? 'open' : 'closed'" class="elv-section">             
+        
+                                                                                        <div *ngFor="let he of dl.anonymizationMethod.hierarchyEntityList, let k = index">
+                                                                                            <button class="elv-header" (click)="viewElvSubList('HE', t, i, j, k)" [class.elv-header-selected]="showSubElv('HE', t, i, j, k)">{{k}}:</button> 
+                                                                                            <div *ngIf="showSubElv('HE', t, i, j, k)">  
+                                                                                                <div [@openClose]="showSubElv('HE', t, i, j, k) ? 'open' : 'closed'" class="elv-section">             
+                                                                                                    <div> value: {{he.hierarchyEntity.value}}</div>  
+                                                                                                </div> 
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <button class="elv-header" (click)="viewElvList('ANMATTR', t, i, j)" [class.elv-header-selected]="showElv('ANMATTR', t, i, j)">anonymizationMethodAttributeList:</button> 
+                                                                                <div *ngIf="showElv('ANMATTR', t, i, j)">  
+                                                                                    <div [@openClose]="showElv('ANMATTR', t, i, j) ? 'open' : 'closed'" class="elv-section">             
+        
+                                                                                        <div *ngFor="let he of dl.anonymizationMethod.anonymizationMethodAttributeList, let k = index">
+                                                                                            <button class="elv-header" (click)="viewElvSubList('ANMATTR', t, i, j, k)" [class.elv-header-selected]="showSubElv('ANMATTR', t, i, j, k)">{{k}}:</button> 
+                                                                                            <div *ngIf="showSubElv('ANMATTR', t, i, j, k)">  
+                                                                                                <div [@openClose]="showSubElv('ANMATTR', t, i, j, k) ? 'open' : 'closed'" class="elv-section">             
+                                                                                                    <div> key: {{he.anonymizationMethodAttribute.key}}</div>  
+                                                                                                    <div> value: {{he.anonymizationMethodAttribute.value}}</div>  
+                                                                                                </div> 
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div> 
+                                                                        </div>
+                                                                        
+                                                                        <button class="elv-header" (click)="viewElvList('DLDC', t, i, j)" [class.elv-header-selected]="showElv('DLDC', t, i, j)">dataCategoryList:</button> 
+                                                                        <div *ngIf="showElv('DLDC', t, i, j)">
+                                                                            <div [@openClose]="showElv('DLDC', t, i, j) ? 'open' : 'closed'" class="elv-section"> 
+                                                                    
+                                                                                <div *ngFor="let dc of dl.dataCategoryList, let k = index">
+                                                                                    <button class="elv-header" (click)="viewElvSubList('DC', t, i, j, k)" [class.elv-header-selected]="showSubElv('DC', t, i, j, k)">{{k}}:</button> 
+                                                                                    <div *ngIf="showSubElv('DC', t, i, j, k)">  
+                                                                                        <div [@openClose]="showSubElv('DC', t, i, j, k) ? 'open' : 'closed'" class="elv-section">             
+                                                                                            
+                                                                                            <button class="elv-headerEl">name: {{dc.name}}</button> 
+
+                                                                                            <button class="elv-header" (click)="viewElvSubList('DCH', t, i, j, k)" [class.elv-header-selected]="showSubElv('DCH', t, i, j, k)">HEAD:</button> 
+                                                                                            <div *ngIf="showSubElv('DCH', t, i, j, k)">  
+                                                                                                <div [@openClose]="showSubElv('DCH', t, i, j, k) ? 'open' : 'closed'" class="elv-section">             
+                                                                                        
+                                                                                                    <div *ngFor="let head of dc.HEAD, let n = index">
+                                                                                                        <button class="elv-header" (click)="viewElvSubListEnd('DCHEAD', t, i, j, k, n)" [class.elv-header-selected]="showSubElvEnd('DCHEAD', t, i, j, k, n)">{{n}}:</button> 
+                                                                                                        <div *ngIf="showSubElvEnd('DCHEAD', t, i, j, k, n)">
+                                                                                                            <div [@openClose]="showSubElvEnd('DCHEAD', t, i, j, k, n) ? 'open' : 'closed'" class="elv-section">             
+                                                                                                                <div> lang: {{head.lang}}</div>
+                                                                                                                <div> value: {{head.value}}</div>  
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                </div>
+                                                                                            </div>
+                                                            
+                                                                                            <button class="elv-header" (click)="viewElvSubList('DCD', t, i, j, k)" [class.elv-header-selected]="showSubElv('DCD', t, i, j, k)">DESC:</button> 
+                                                                                            <div *ngIf="showSubElv('DCD', t, i, j, k)">  
+                                                                                                <div [@openClose]="showSubElv('DCD', t, i, j, k) ? 'open' : 'closed'" class="elv-section">             
+                                                                                        
+                                                                                                    <div *ngFor="let desc of dc.DESC, let n = index">
+                                                                                                        <button class="elv-header" (click)="viewElvSubListEnd('DCDESC', t, i, j, k, n)" [class.elv-header-selected]="showSubElvEnd('DCDESC', t, i, j, k, n)">{{n}}:</button> 
+                                                                                                        <div *ngIf="showSubElvEnd('DCDESC', t, i, j, k, n)">  
+                                                                                                            <div [@openClose]="showSubElvEnd('DCDESC', t, i, j, k, n) ? 'open' : 'closed'" class="elv-section">             
+                                                                                                                <div> lang: {{desc.lang}}</div>
+                                                                                                                <div> value: {{desc.value}}</div>  
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                        </div> 
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <button class="elv-header" (click)="viewElvList('DLDG', t, i, j)" [class.elv-header-selected]="showElv('DLDG', t, i, j)">dataGroupList:</button> 
+                                                                        <div *ngIf="showElv('DLDG', t, i, j)">
+                                                                            <div [@openClose]="showElv('DLDG', t, i, j) ? 'open' : 'closed'" class="elv-section"> 
+                                                                        
+                                                                                <div *ngFor="let dc of dl.dataGroupList, let k = index">
+                                                                                    <button class="elv-header" (click)="viewElvSubList('DG', t, i, j, k)" [class.elv-header-selected]="showSubElv('DG', t, i, j, k)">{{k}}:</button> 
+                                                                                    <div *ngIf="showSubElv('DG', t, i, j, k)">  
+                                                                                        <div [@openClose]="showSubElv('DG', t, i, j, k) ? 'open' : 'closed'" class="elv-section">             
+                                                                                            <button class="elv-headerEl">name: {{dc.name}}</button>
+
+                                                                                            <button class="elv-header" (click)="viewElvSubList('DGH', t, i, j, k)" [class.elv-header-selected]="showSubElv('DGH', t, i, j, k)">HEAD:</button> 
+                                                                                            <div *ngIf="showSubElv('DGH', t, i, j, k)">  
+                                                                                                <div [@openClose]="showSubElv('DGH', t, i, j, k) ? 'open' : 'closed'" class="elv-section">             
+                                                                                            
+                                                                                                    <div *ngFor="let head of dc.HEAD, let n = index">
+                                                                                                        <button class="elv-header" (click)="viewElvSubListEnd('DGHEAD', t, i, j, k, n)" [class.elv-header-selected]="showSubElvEnd('DGHEAD', t, i, j, k, n)">{{n}}:</button> 
+                                                                                                        <div *ngIf="showSubElvEnd('DGHEAD', t, i, j, k, n)">
+                                                                                                            <div [@openClose]="showSubElvEnd('DGHEAD', t, i, j, k, n) ? 'open' : 'closed'" class="elv-section">             
+                                                                                                                <div> lang: {{head.lang}}</div>
+                                                                                                                <div> value: {{head.value}}</div>  
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                </div>
+                                                                                            </div>
+                                                            
+                                                                                            <button class="elv-header" (click)="viewElvSubList('DGD', t, i, j, k)" [class.elv-header-selected]="showSubElv('DGD', t, i, j, k)">DESC:</button> 
+                                                                                            <div *ngIf="showSubElv('DGD', t, i, j, k)">  
+                                                                                                <div [@openClose]="showSubElv('DGD', t, i, j, k) ? 'open' : 'closed'" class="elv-section">             
+                                                                                            
+                                                                                                    <div *ngFor="let desc of dc.DESC, let n = index">
+                                                                                                        <button class="elv-header" (click)="viewElvSubListEnd('DGDESC', t, i, j, k, n)" [class.elv-header-selected]="showSubElvEnd('DGDESC', t, i, j, k, n)">{{n}}:</button> 
+                                                                                                        <div *ngIf="showSubElvEnd('DGDESC', t, i, j, k, n)">  
+                                                                                                            <div [@openClose]="showSubElvEnd('DGDESC', t, i, j, k, n) ? 'open' : 'closed'" class="elv-section">             
+                                                                                                                <div> lang: {{desc.lang}}</div>
+                                                                                                                <div> value: {{desc.value}}</div>  
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                    </div>
+
+                                                                                                </div>
+                                                                                            </div>
+
+                                                                                        </div> 
+                                                                                    </div>
+                                                                                </div>
+
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                        
+                                                                </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+        
+                                            <button class="elv-header" (click)="viewListEl('R', t, i)" [class.elv-header-selected]="showEl('R', t, i)">retention:</button> 
+                                            <div *ngIf="showEl('R', t, i)">
+                                                <div [@openClose]="showEl('R', t, i) ? 'open' : 'closed'" class="elv-section"> 
+                                                    
+                                                    <button class="elv-headerEl">type: {{p.retention.type}}</button>
+                                                    <button class="elv-headerEl">pointInTime: {{p.retention.pointInTime}}</button>
+                                                
+                                                    <button class="elv-header" (click)="viewListEl('RH', t, i)" [class.elv-header-selected]="showEl('RH', t, i)">HEAD:</button> 
+                                                    <div *ngIf="showEl('RH', t, i)">
+                                                        <div [@openClose]="showEl('RH', t, i) ? 'open' : 'closed'" class="elv-section"> 
+                                                    
+                                                            <div *ngFor="let head of p.retention.HEAD, let j = index">
+                                                                <button class="elv-header" (click)="viewElvList('RHEAD', t, i, j)" [class.elv-header-selected]="showElv('RHEAD', t, i, j)">{{j}}:</button> 
+                                                                    <div *ngIf="showElv('RHEAD', t, i, j)">
+                                                                        <div [@openClose]="showElv('RHEAD', t, i, j) ? 'open' : 'closed'" class="elv-section">  
+                                                                            <div> lang: {{head.lang}}</div>
+                                                                            <div> value: {{head.value}}</div> 
+                                                                        </div>
+                                                                    </div>
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+                
+                                                    <button class="elv-header" (click)="viewListEl('RD', t, i)" [class.elv-header-selected]="showEl('RD', t, i)">DESC:</button> 
+                                                    <div *ngIf="showEl('RD', t, i)">
+                                                        <div [@openClose]="showEl('RD', t, i) ? 'open' : 'closed'" class="elv-section"> 
+                                                    
+                                                            <div *ngFor="let desc of p.retention.DESC, let j = index"> 
+                                                                <button class="elv-header" (click)="viewElvList('RDESC', t, i, j)" [class.elv-header-selected]="showElv('RDESC', t, i, j)">{{j}}:</button> 
+                                                                    <div *ngIf="showElv('RDESC', t, i, j)">
+                                                                        <div [@openClose]="showElv('RDESC', t, i, j) ? 'open' : 'closed'" class="elv-section"> 
+                                                                            <div> lang: {{desc.lang}}</div>
+                                                                            <div> value: {{desc.value}}</div>
+                                                                        </div>
+                                                                    </div>  
+                                                            </div> 
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>  
+
+                                            <button class="elv-header" (click)="viewListEl('PPM', t, i)" [class.elv-header-selected]="showEl('PPM', t, i)">privacyModelList:</button> 
+                                            <div *ngIf="showEl('PPM', t, i)">
+                                                <div [@openClose]="showEl('PPM', t, i) ? 'open' : 'closed'" class="elv-section">
+            
+                                                    <div *ngFor="let dm of p.privacyModelList, let j = index"> 
+                                                        <button class="elv-header" (click)="viewElvList('PM', t, i, j)" [class.elv-header-selected]="showElv('PM', t, i, j)">{{j}}:</button> 
+                                                            <div *ngIf="showElv('PM', t, i, j)">
+                                                                <div [@openClose]="showElv('PM', t, i, j) ? 'open' : 'closed'" class="elv-section"> 
+                                                                    <button class="elv-headerEl"> name: {{dm.name}}</button>
+
+                                                                    <button class="elv-header" (click)="viewElvList('PMH', t, i, j)" [class.elv-header-selected]="showElv('PMH', t, i, j)">HEAD:</button> 
+                                                                    <div *ngIf="showElv('PMH', t, i, j)">
+                                                                        <div [@openClose]="showElv('PMH', t, i, j) ? 'open' : 'closed'" class="elv-section"> 
+                                                                
+                                                                            <div *ngFor="let head of dm.HEAD, let k = index">
+                                                                                <button class="elv-header" (click)="viewElvSubList('PMHEAD', t, i, j, k)" [class.elv-header-selected]="showSubElv('PMHEAD', t, i, j, k)">{{k}}:</button> 
+                                                                                <div *ngIf="showSubElv('PMHEAD', t, i, j, k)">
+                                                                                    <div [@openClose]="showSubElv('PMHEAD', t, i, j, k) ? 'open' : 'closed'" class="elv-section">             
+                                                                                        <div> lang: {{head.lang}}</div>
+                                                                                        <div> value: {{head.value}}</div>  
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                    
+                                                                    <button class="elv-header" (click)="viewElvList('PMD', t, i, j)" [class.elv-header-selected]="showElv('PMD', t, i, j)">DESC:</button> 
+                                                                    <div *ngIf="showElv('PMD', t, i, j)">
+                                                                        <div [@openClose]="showElv('PMD', t, i, j) ? 'open' : 'closed'" class="elv-section"> 
+                                                                    
+                                                                            <div *ngFor="let desc of dm.DESC, let k = index">
+                                                                                <button class="elv-header" (click)="viewElvSubList('PMDESC', t, i, j, k)" [class.elv-header-selected]="showSubElv('PMDESC', t, i, j, k)">{{k}}:</button> 
+                                                                                <div *ngIf="showSubElv('PMDESC', t, i, j, k)">  
+                                                                                    <div [@openClose]="showSubElv('PMDESC', t, i, j, k) ? 'open' : 'closed'" class="elv-section">             
+                                                                                        <div> lang: {{desc.lang}}</div>
+                                                                                        <div> value: {{desc.value}}</div>  
+                                                                                    </div> 
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <button class="elv-header" (click)="viewElvList('PMNOD', t, i, j)" [class.elv-header-selected]="showElv('PMNOD', t, i, j)">nameOfDataList:</button> 
+                                                                    <div *ngIf="showElv('PMNOD', t, i, j)">
+                                                                        <div [@openClose]="showElv('PMNOD', t, i, j) ? 'open' : 'closed'" class="elv-section"> 
+                                                                    
+                                                                            <div *ngFor="let nOd of dm.nameOfDataList, let k = index">
+                                                                                <button class="elv-header" (click)="viewElvSubList('NoDdm', t, i, j, k)" [class.elv-header-selected]="showSubElv('NoDdm', t, i, j, k)">{{k}}:</button> 
+                                                                                <div *ngIf="showSubElv('NoDdm', t, i, j, k)">  
+                                                                                    <div [@openClose]="showSubElv('NoDdm', t, i, j, k) ? 'open' : 'closed'" class="elv-section">             
+                                                                                        <div> name: {{nOd.name}}</div>  
+                                                                                    </div> 
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>                                                        
+
+                                                                    <button class="elv-header" (click)="viewElvList('PMATTRI', t, i, j)" [class.elv-header-selected]="showElv('PMATTRI', t, i, j)">privacyModelAttributeList:</button> 
+                                                                    <div *ngIf="showElv('PMATTRI', t, i, j)">
+                                                                        <div [@openClose]="showElv('PMATTRI', t, i, j) ? 'open' : 'closed'" class="elv-section"> 
+                                                                    
+                                                                            <div *ngFor="let pmattr of dm.privacyModelAttributeList, let k = index">
+                                                                                <button class="elv-header" (click)="viewElvSubList('PMATTR', t, i, j, k)" [class.elv-header-selected]="showSubElv('PMATTR', t, i, j, k)">{{k}}:</button> 
+                                                                                <div *ngIf="showSubElv('PMATTR', t, i, j, k)">  
+                                                                                    <div [@openClose]="showSubElv('PMATTR', t, i, j, k) ? 'open' : 'closed'" class="elv-section">             
+                                                                                        <div> key: {{pmattr.key}}</div>  
+                                                                                        <div> vale: {{pmattr.value}}</div> 
+                                                                                    </div> 
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                                    
+
+                                                                </div>
+                                                            </div>  
+                                                    </div> 
+
+                                                </div>
+                                            </div>
+
+                                            <button class="elv-header" (click)="viewListEl('PLBA', t, i)" [class.elv-header-selected]="showEl('PLBA', t, i)">legalBasisList:</button> 
+                                            <div *ngIf="showEl('PLBA', t, i)">
+                                                <div [@openClose]="showEl('PLBA', t, i) ? 'open' : 'closed'" class="elv-section">
+            
+                                                    <div *ngFor="let lb of p.legalBasisList, let j = index"> 
+                                                        <button class="elv-header" (click)="viewElvList('LB', t, i, j)" [class.elv-header-selected]="showElv('LB', t, i, j)">{{j}}:</button> 
+                                                            <div *ngIf="showElv('LB', t, i, j)">
+                                                                <div [@openClose]="showElv('LB', t, i, j) ? 'open' : 'closed'" class="elv-section"> 
+                                                                    <div> lbCategory: {{lb.lbCategory}}</div>
+
+                                                                    <button class="elv-header" (click)="viewElvList('LBHH', t, i, j)" [class.elv-header-selected]="showElv('LBHH', t, i, j)">HEAD:</button> 
+                                                                    <div *ngIf="showElv('LBHH', t, i, j)">
+                                                                        <div [@openClose]="showElv('LBHH', t, i, j) ? 'open' : 'closed'" class="elv-section"> 
+                                                                    
+                                                                            <div *ngFor="let head of lb.HEAD, let k = index">
+                                                                                <button class="elv-header" (click)="viewElvSubList('LBHEAD', t, i, j, k)" [class.elv-header-selected]="showSubElv('LBHEAD', t, i, j, k)">{{k}}:</button> 
+                                                                                <div *ngIf="showSubElv('LBHEAD', t, i, j, k)">
+                                                                                    <div [@openClose]="showSubElv('LBHEAD', t, i, j, k) ? 'open' : 'closed'" class="elv-section">             
+                                                                                        <div> lang: {{head.lang}}</div>
+                                                                                        <div> value: {{head.value}}</div>  
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                    
+                                                                    <button class="elv-header" (click)="viewElvList('LBDD', t, i, j)" [class.elv-header-selected]="showElv('LBDD', t, i, j)">DESC:</button> 
+                                                                    <div *ngIf="showElv('LBDD', t, i, j)">
+                                                                        <div [@openClose]="showElv('LBDD', t, i, j) ? 'open' : 'closed'" class="elv-section"> 
+                                                                    
+                                                                            <div *ngFor="let desc of lb.DESC, let k = index">
+                                                                                <button class="elv-header" (click)="viewElvSubList('LBDESC', t, i, j, k)" [class.elv-header-selected]="showSubElv('LBDESC', t, i, j, k)">{{k}}:</button> 
+                                                                                <div *ngIf="showSubElv('LBDESC', t, i, j, k)">  
+                                                                                    <div [@openClose]="showSubElv('LBDESC', t, i, j, k) ? 'open' : 'closed'" class="elv-section">             
+                                                                                        <div> lang: {{desc.lang}}</div>
+                                                                                        <div> value: {{desc.value}}</div>  
+                                                                                    </div> 
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>  
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <button class="elv-header" (click)="viewListEl('PADML', t, i)" [class.elv-header-selected]="showEl('PADML', t, i)">automatedDecisionMakingList:</button> 
+                                            <div *ngIf="showEl('PADML', t, i)">
+                                                <div [@openClose]="showEl('PADML', t, i) ? 'open' : 'closed'" class="elv-section">
+            
+                                                    <div *ngFor="let adm of p.automatedDecisionMakingList, let j = index"> 
+                                                        <button class="elv-header" (click)="viewElvList('ADM', t, i, j)" [class.elv-header-selected]="showElv('ADM', t, i, j)">{{j}}:</button> 
+                                                            <div *ngIf="showElv('ADM', t, i, j)">
+                                                                <div [@openClose]="showElv('ADM', t, i, j) ? 'open' : 'closed'" class="elv-section"> 
+                                                                    <div> name: {{adm.name}}</div>
+
+                                                                    <button class="elv-header" (click)="viewElvList('ADMHH', t, i, j)" [class.elv-header-selected]="showElv('ADMHH', t, i, j)">HEAD:</button> 
+                                                                    <div *ngIf="showElv('ADMHH', t, i, j)">
+                                                                        <div [@openClose]="showElv('ADMHH', t, i, j) ? 'open' : 'closed'" class="elv-section"> 
+                                                                    
+                                                                            <div *ngFor="let head of adm.HEAD, let k = index">
+                                                                                <button class="elv-header" (click)="viewElvSubList('ADMHEAD', t, i, j, k)" [class.elv-header-selected]="showSubElv('ADMHEAD', t, i, j, k)">{{k}}:</button> 
+                                                                                <div *ngIf="showSubElv('ADMHEAD', t, i, j, k)">
+                                                                                    <div [@openClose]="showSubElv('ADMHEAD', t, i, j, k) ? 'open' : 'closed'" class="elv-section">             
+                                                                                        <div> lang: {{head.lang}}</div>
+                                                                                        <div> value: {{head.value}}</div>  
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                    
+                                                                    <button class="elv-header" (click)="viewElvList('ADMDD', t, i, j)" [class.elv-header-selected]="showElv('ADMDD', t, i, j)">DESC:</button> 
+                                                                    <div *ngIf="showElv('ADMDD', t, i, j)">
+                                                                        <div [@openClose]="showElv('ADMDD', t, i, j) ? 'open' : 'closed'" class="elv-section"> 
+                                                                    
+                                                                            <div *ngFor="let desc of adm.DESC, let k = index">
+                                                                                <button class="elv-header" (click)="viewElvSubList('ADMDESC', t, i, j, k)" [class.elv-header-selected]="showSubElv('ADMDESC', t, i, j, k)">{{k}}:</button> 
+                                                                                <div *ngIf="showSubElv('ADMDESC', t, i, j, k)">  
+                                                                                    <div [@openClose]="showSubElv('ADMDESC', t, i, j, k) ? 'open' : 'closed'" class="elv-section">             
+                                                                                        <div> lang: {{desc.lang}}</div>
+                                                                                        <div> value: {{desc.value}}</div>  
+                                                                                    </div> 
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>  
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                            <button class="elv-header" (click)="viewListEl('PPNML', t, i)" [class.elv-header-selected]="showEl('PPNML', t, i)">pseudonymizationMethodList:</button> 
+                                            <div *ngIf="showEl('PPNML', t, i)">
+                                                <div [@openClose]="showEl('PPNML', t, i) ? 'open' : 'closed'" class="elv-section">
+            
+                                                    <div *ngFor="let pnm of p.pseudonymizationMethodList, let j = index"> 
+                                                        <button class="elv-header" (click)="viewElvList('PNM', t, i, j)" [class.elv-header-selected]="showElv('PNM', t, i, j)">{{j}}:</button> 
+                                                            <div *ngIf="showElv('PNM', t, i, j)">
+                                                                <div [@openClose]="showElv('PNM', t, i, j) ? 'open' : 'closed'" class="elv-section"> 
+                                                                    <div> name: {{pnm.name}}</div>
+                                                                    <div>attrName: {{pnm.attrName}}</div>
+                                                                    
+                                                                    <button class="elv-header" (click)="viewElvList('PNMHH', t, i, j)" [class.elv-header-selected]="showElv('PNMHH', t, i, j)">HEAD:</button> 
+                                                                    <div *ngIf="showElv('PNMHH', t, i, j)">
+                                                                        <div [@openClose]="showElv('PNMHH', t, i, j) ? 'open' : 'closed'" class="elv-section"> 
+                                                                            
+                                                                            <div *ngFor="let head of pnm.HEAD, let k = index">
+                                                                                <button class="elv-header" (click)="viewElvSubList('PNMHEAD', t, i, j, k)" [class.elv-header-selected]="showSubElv('PNMHEAD', t, i, j, k)">{{k}}:</button> 
+                                                                                <div *ngIf="showSubElv('PNMHEAD', t, i, j, k)">
+                                                                                    <div [@openClose]="showSubElv('PNMHEAD', t, i, j, k) ? 'open' : 'closed'" class="elv-section">             
+                                                                                        <div> lang: {{head.lang}}</div>
+                                                                                        <div> value: {{head.value}}</div>  
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                    
+                                                                    <button class="elv-header" (click)="viewElvList('PNMDD', t, i, j)" [class.elv-header-selected]="showElv('PNMDD', t, i, j)">DESC:</button> 
+                                                                    <div *ngIf="showElv('PNMDD', t, i, j)">
+                                                                        <div [@openClose]="showElv('PNMDD', t, i, j) ? 'open' : 'closed'" class="elv-section"> 
+                                                                        
+                                                                            <div *ngFor="let desc of pnm.DESC, let k = index">
+                                                                                <button class="elv-header" (click)="viewElvSubList('PNMDESC', t, i, j, k)" [class.elv-header-selected]="showSubElv('PNMDESC', t, i, j, k)">{{k}}:</button> 
+                                                                                <div *ngIf="showSubElv('PNMDESC', t, i, j, k)">  
+                                                                                    <div [@openClose]="showSubElv('PNMDESC', t, i, j, k) ? 'open' : 'closed'" class="elv-section">             
+                                                                                        <div> lang: {{desc.lang}}</div>
+                                                                                        <div> value: {{desc.value}}</div>  
+                                                                                    </div> 
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <button class="elv-header" (click)="viewElvList('PNMARRI', t, i, j)" [class.elv-header-selected]="showElv('PNMARRI', t, i, j)">pseudonymizationMethodAttributeList:</button> 
+                                                                    <div *ngIf="showElv('PNMARRI', t, i, j)">
+                                                                        <div [@openClose]="showElv('PNMARRI', t, i, j) ? 'open' : 'closed'" class="elv-section"> 
+                                                                        
+                                                                            <div *ngFor="let pnmattr of pnm.pseudonymizationMethodAttributeList, let k = index">
+                                                                                <button class="elv-header" (click)="viewElvSubList('PNMATTR', t, i, j, k)" [class.elv-header-selected]="showSubElv('PNMATTR', t, i, j, k)">{{k}}:</button> 
+                                                                                <div *ngIf="showSubElv('PNMATTR', t, i, j, k)">  
+                                                                                    <div [@openClose]="showSubElv('PNMATTR', t, i, j, k) ? 'open' : 'closed'" class="elv-section">             
+                                                                                        <div> key: {{pnmattr.key}}</div>
+                                                                                        <div> value: {{pnmattr.value}}</div>  
+                                                                                    </div> 
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+                                                    
+                                                                    <button class="elv-header" (click)="viewElvList('PNMNODD', t, i, j)" [class.elv-header-selected]="showElv('PNMNODD', t, i, j)">nameOfDataList:</button> 
+                                                                    <div *ngIf="showElv('PNMNODD', t, i, j)">
+                                                                        <div [@openClose]="showElv('PNMNODD', t, i, j) ? 'open' : 'closed'" class="elv-section"> 
+                                                                        
+                                                                            <div *ngFor="let pnmNoD of pnm.nameOfDataList, let k = index">
+                                                                                <button class="elv-header" (click)="viewElvSubList('PNMNoD', t, i, j, k)" [class.elv-header-selected]="showSubElv('PNMNoD', t, i, j, k)">{{k}}:</button> 
+                                                                                <div *ngIf="showSubElv('PNMNoD', t, i, j, k)">  
+                                                                                    <div [@openClose]="showSubElv('PNMNoD', t, i, j, k) ? 'open' : 'closed'" class="elv-section">             
+                                                                                        <div> name: {{pnmNoD.name}}</div>
+                                                                                    </div> 
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>  
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div> 
+                                    </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="elv-header" (click)="viewList('C', t)" [class.elv-header-selected]="show('C', t)">controllerList:</button> 
+                            <div *ngIf="show('C', t)">
+                                <div *ngFor="let c of item.controllerList, let i = index">
+                                    <div [@openClose]="show('C', t) ? 'open' : 'closed'" class="elv-section">
+
+                                        <button class="elv-header" (click)="viewListEl('C', t, i)" [class.elv-header-selected]="showEl('C', t, i)">{{i}}:</button> 
+                                        <div *ngIf="showEl('C', t, i)">
+                                            <div [@openClose]="showEl('C', t, i) ? 'open' : 'closed'" class="elv-section">
+
+                                                <button class="elv-header" (click)="viewListEl('CHH', t, i)" [class.elv-header-selected]="showEl('CHH', t, i)">HEAD:</button> 
+                                                <div *ngIf="showEl('CHH', t, i)">
+                                                    <div [@openClose]="showEl('CHH', t, i) ? 'open' : 'closed'" class="elv-section">
+                                                        <div *ngFor="let head of c.HEAD, let j = index">
+                                                            <button class="elv-header" (click)="viewElvList('CHEAD', t, i, j)" [class.elv-header-selected]="showElv('CHEAD', t, i, j)">{{j}}:</button> 
+                                                            <div *ngIf="showElv('CHEAD', t, i, j)">
+                                                                <div [@openClose]="showElv('CHEAD', t, i, j) ? 'open' : 'closed'" class="elv-section">
+                                                                    <div> lang: {{head.lang}}</div>
+                                                                    <div> value: {{head.value}}</div>  
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <button class="elv-header" (click)="viewListEl('CDD', t, i)" [class.elv-header-selected]="showEl('CDD', t, i)">DESC:</button> 
+                                                <div *ngIf="showEl('CDD', t, i)">
+                                                    <div [@openClose]="showEl('CDD', t, i) ? 'open' : 'closed'" class="elv-section">
+                                                        
+                                                        <div *ngFor="let desc of c.DESC, let j = index"> 
+                                                            <button class="elv-header" (click)="viewElvList('CDESC', t, i, j)" [class.elv-header-selected]="showElv('CDESC', t, i, j)">{{j}}:</button> 
+                                                            <div *ngIf="showElv('CDESC', t, i, j)">
+                                                                <div [@openClose]="showElv('CDESC', t, i, j) ? 'open' : 'closed'" class="elv-section">         
+                                                                    <div> lang: {{desc.lang}}</div>
+                                                                    <div> value: {{desc.value}}</div>  
+                                                                </div>
+                                                            </div>
+                                                        </div> 
+
+                                                    </div>
+                                                </div>
+
+                                                <div> name: {{c.name}} </div>
+
+                                                <div> authInfo: {{c.authInfo}} </div>
+
+                                                <div> classification: {{c.classification}} </div>
+
+                                                <div> type: {{c.type}} </div>
+
+                                                <div> firstName: {{c.firstName}} </div>
+
+                                                <div> lastName: {{c.lastName}} </div>
+
+                                                <div> address: {{c.address}} </div>
+
+                                                <div> phoneNumber: {{c.phoneNumber}} </div>
+
+                                                <div> email: {{c.email}} </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="elv-header" (click)="viewList('DPO', t)" [class.elv-header-selected]="show('DPO', t)">dataProtectionOfficerList:</button> 
+                            <div *ngIf="show('DPO', t)">
+                                <div *ngFor="let dpo of item.dataProtectionOfficerList, let i = index">
+                                    <div [@openClose]="show('DPO', t) ? 'open' : 'closed'" class="elv-section">
+                                    
+                                        <button class="elv-header" (click)="viewListEl('DPO', t, i)" [class.elv-header-selected]="showEl('DPO', t, i)">{{i}}:</button> 
+                                        <div *ngIf="showEl('DPO', t, i)">
+                                            <div [@openClose]="showEl('DPO', t, i) ? 'open' : 'closed'" class="elv-section">
+
+                                                <button class="elv-header" (click)="viewListEl('DPOHH', t, i)" [class.elv-header-selected]="showEl('DPOHH', t, i)">HEAD:</button> 
+                                                    <div *ngIf="showEl('DPOHH', t, i)">
+                                                        <div [@openClose]="showEl('DPOHH', t, i) ? 'open' : 'closed'" class="elv-section">
+        
+                                                            <div *ngFor="let head of dpo.HEAD, let j = index">
+                                                                <button class="elv-header" (click)="viewElvList('DPOHEAD', t, i, j)" [class.elv-header-selected]="showElv('DPOHEAD', t, i, j)">{{j}}:</button> 
+                                                                <div *ngIf="showElv('DPOHEAD', t, i, j)">
+                                                                    <div [@openClose]="showElv('DPOHEAD', t, i, j) ? 'open' : 'closed'" class="elv-section">            
+                                                                        <div> lang: {{head.lang}}</div>
+                                                                        <div> value: {{head.value}}</div> 
+                                                                    </div>
+                                                                </div> 
+                                                            </div>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <button class="elv-header" (click)="viewListEl('DPODD', t, i)" [class.elv-header-selected]="showEl('DPODD', t, i)">DESC:</button> 
+                                                    <div *ngIf="showEl('DPODD', t, i)">
+                                                        <div [@openClose]="showEl('DPODD', t, i) ? 'open' : 'closed'" class="elv-section">
+        
+                                                            <div *ngFor="let desc of dpo.DESC, let j = index"> 
+                                                                <button class="elv-header" (click)="viewElvList('DPODESC', t, i, j)" [class.elv-header-selected]="showElv('DPODESC', t, i, j)">{{j}}:</button> 
+                                                                <div *ngIf="showElv('DPODESC', t, i, j)">
+                                                                    <div [@openClose]="showElv('DPODESC', t, i, j) ? 'open' : 'closed'" class="elv-section">         
+                                                                        <div> lang: {{desc.lang}}</div>
+                                                                        <div> value: {{desc.value}}</div> 
+                                                                    </div>
+                                                                </div> 
+                                                            </div> 
+
+                                                        </div>
+                                                    </div>
+
+                                                <div> name: {{dpo.name}} </div>
+
+                                                <div> authInfo: {{dpo.authInfo}} </div>
+
+                                                <div> classification: {{dpo.classification}} </div>
+
+                                                <div> type: {{dpo.type}} </div>
+
+                                                <div> firstName: {{dpo.firstName}} </div>
+
+                                                <div> lastName: {{dpo.lastName}} </div>
+
+                                                <div> address: {{dpo.address}} </div>
+
+                                                <div> phoneNumber: {{dpo.phoneNumber}} </div>
+
+                                                <div> email: {{dpo.email}} </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="elv-header" (click)="viewList('DSR', t)" [class.elv-header-selected]="show('DSR', t)">dataSubjectRightList:</button> 
+                            <div *ngIf="show('DSR', t)">
+                                <div [@openClose]="show('DSR', t) ? 'open' : 'closed'" class="elv-section">
+                                    
+                                    <div *ngFor="let dsr of item.dataSubjectRightList, let i = index">
+                                    
+                                        <button class="elv-header" (click)="viewListEl('DSR', t, i)" [class.elv-header-selected]="showEl('DSR', t, i)">{{i}}:</button> 
+                                        <div *ngIf="showEl('DSR', t, i)">
+                                            <div [@openClose]="showEl('DSR', t, i) ? 'open' : 'closed'" class="elv-section">
+                                                
+                                                <div> name: {{dsr.name}} </div>
+
+                                                <button class="elv-header" (click)="viewListEl('DSRHH', t, i)" [class.elv-header-selected]="showEl('DSRHH', t, i)">HEAD:</button> 
+                                                <div *ngIf="showEl('DSRHH', t, i)">
+                                                    <div [@openClose]="showEl('DSRHH', t, i) ? 'open' : 'closed'" class="elv-section">
+                                                
+                                                        <div *ngFor="let head of dsr.HEAD, let j = index">
+                                                            <button class="elv-header" (click)="viewElvList('DSRHEAD', t, i, j)" [class.elv-header-selected]="showElv('DSRHEAD', t, i, j)">{{j}}:</button> 
+                                                            <div *ngIf="showElv('DSRHEAD', t, i, j)">
+                                                                <div [@openClose]="showElv('DSRHEAD', t, i, j) ? 'open' : 'closed'" class="elv-section">
+                                                                    <div> lang: {{head.lang}}</div>
+                                                                    <div> value: {{head.value}}</div> 
+                                                                </div> 
+                                                            </div> 
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                                <button class="elv-header" (click)="viewListEl('DSRDD', t, i)" [class.elv-header-selected]="showEl('DSRDD', t, i)">DESC:</button> 
+                                                <div *ngIf="showEl('DSRDD', t, i)">
+                                                    <div [@openClose]="showEl('DSRDD', t, i) ? 'open' : 'closed'" class="elv-section">
+                                                
+                                                        <div *ngFor="let desc of dsr.DESC, let j = index"> 
+                                                            <button class="elv-header" (click)="viewElvList('DSRDESC', t, i, j)" [class.elv-header-selected]="showElv('DSRDESC', t, i, j)">{{j}}:</button> 
+                                                            <div *ngIf="showElv('DSRDESC', t, i, j)">
+                                                                <div [@openClose]="showElv('DSRDESC', t, i, j) ? 'open' : 'closed'" class="elv-section"> 
+                                                                    <div> lang: {{desc.lang}}</div>
+                                                                    <div> value: {{desc.value}}</div>  
+                                                                </div> 
+                                                            </div>
+                                                        </div> 
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button class="elv-header" (click)="viewList('LC', t)" [class.elv-header-selected]="show('LC', t)">lodgeComplaint:</button> 
+                            <div *ngIf="show('LC', t)">
+                                <div [@openClose]="show('LC', t) ? 'open' : 'closed'" class="elv-section">
+                                    <div> name: {{item.lodgeComplaint.name}} </div>
+        
+                                    <button class="elv-header" (click)="viewList('LCHH', t)" [class.elv-header-selected]="show('LCHH', t)">HEAD:</button> 
+                                    <div *ngIf="show('LCHH', t)">
+                                        <div [@openClose]="show('LCHH', t) ? 'open' : 'closed'" class="elv-section">
+
+                                            <div *ngFor="let head of item.lodgeComplaint.HEAD, let i = index">
+                                                <button class="elv-header" (click)="viewListEl('LCHEAD', t, i)" [class.elv-header-selected]="showEl('LCHEAD', t, i)">{{i}}:</button> 
+                                                <div *ngIf="showEl('LCHEAD', t, i)">
+                                                    <div [@openClose]="showEl('LCHEAD', t, i) ? 'open' : 'closed'" class="elv-section">
+                                                        <div> lang: {{head.lang}}</div>
+                                                        <div> value: {{head.value}}</div>  
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button class="elv-header" (click)="viewList('LCDD', t)" [class.elv-header-selected]="show('LCDD', t)">DESC:</button> 
+                                    <div *ngIf="show('LCDD', t)">
+                                        <div [@openClose]="show('LCDD', t) ? 'open' : 'closed'" class="elv-section">
+
+                                            <div *ngFor="let desc of item.lodgeComplaint.DESC, let i = index"> 
+                                                <button class="elv-header" (click)="viewListEl('LCDESC', t, i)" [class.elv-header-selected]="showEl('LCDESC', t, i)">{{i}}:</button> 
+                                                <div *ngIf="showEl('LCDESC', t, i)">
+                                                    <div> lang: {{desc.lang}}</div>
+                                                    <div> value: {{desc.value}}</div> 
+                                                </div>
+                                            </div> 
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                   
+                        
+                    </div>
+
+                  </li>
+                </ng-template>
+                <ng-container *ngTemplateOutlet="recursiveTree; context:{ $implicit: list }"></ng-container>
+              </ul>
+
+        </mat-card>
+      </div>
+    </div>
+  
+    <div class="button-wrapper">
+      <button mat-button (click)="close()" class="cansel-button">CLOSE</button>
+    </div>
+    
+  </div>

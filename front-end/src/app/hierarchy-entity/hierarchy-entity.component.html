@@ -1,0 +1,32 @@
+<div [formGroup]="frmHe">
+    <ng-container formArrayName="hes">
+        <ng-container *ngFor="let he of hes.controls; let i = index">
+
+            <div class="view">
+                <button class="elv-header" (click)="viewList('El', i)" [class.elv-header-selected]="show('El', i)">{{getBoxText(i)}}</button> 
+                <div class="delete-button-wrapper">
+                    <button class="delete-button" *ngIf="hes.length > 1" (click)="deleteHe(i)">
+                        <mat-icon>delete_forever</mat-icon>
+                    </button>
+                </div>
+              </div>
+              
+              <div *ngIf="show('El', i)">
+
+                <div class="body" [formGroupName]="i"> 
+                    <mat-form-field class="input-field" appearance="fill">
+                        <mat-label>Value</mat-label>
+                        <input matInput formControlName="value" required placeholder="Enter Value">
+                    </mat-form-field>                                           
+                </div>
+
+              </div>
+              
+        </ng-container>
+
+        <button mat-button class="add-button" (click)="addHe()">
+            <mat-icon>add</mat-icon> NEW HIERARCHY ENTITY
+        </button>
+
+    </ng-container>
+</div>

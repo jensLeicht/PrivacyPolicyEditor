@@ -1,0 +1,138 @@
+::ng-deep .mat-dialog-container {
+  height: 95vh;
+  width: 95vw;
+}
+
+.form {
+  background-color: var(--secondary-color);
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+.header {
+  background-color: var(--auxiliary-color-transparent);
+  padding: 5px;
+  display: flex;
+}
+
+.text {
+  margin: 20px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.save-button {
+  float: right;
+  margin: 6px;
+  color: var(--text-inverse-color);
+  background-color: var(--auxiliary-color);
+  box-shadow: 2px 2px 2px 1px var(--secondary-color);
+}
+
+.warn-button {
+  float: right;
+  margin: 6px;
+  color: var(--text-inverse-color);
+  background-color: var(--warning-color);
+  box-shadow: 2px 2px 2px 1px var(--secondary-color);
+}
+
+.cancel-button {
+  float: right;
+  margin: 6px;
+  color: var(--text-inverse-color);
+  background-color: var(--secondary-color);
+  box-shadow: 2px 2px 2px 1px var(--secondary-color);
+}
+  
+.save-button:disabled {
+  border: 1px solid var(--primary-color);
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+.button-wrapper {
+  bottom: 0px;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+  background-color: var(--auxiliary-color) !important;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+  background-color: var(--auxiliary-color);
+}
+
+.scroll-box {
+  max-height: 600px;
+  overflow: auto;
+  padding: 5px;
+  width: 45%;
+}
+
+.border-div {
+  border: 0.5px solid var(--primary-color-transparent);
+  padding: 5px;
+}
+
+.desc-head {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.main-wrapper {
+  display: flex;
+  justify-content: space-between;
+  border-bottom-style: groove;
+  border-bottom-width: 1px;
+}  
+
+.right {
+  width: 30%;
+  display: flex;
+}
+
+.info {
+  width: 100%;
+  margin-block: 10px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  cursor: pointer;
+}
+
+.info:hover {
+  background-color: var(--auxiliary-color-transparent);
+}
+
+.check-box {
+  padding-bottom: 20px;
+}
+
+.infoIc {
+  vertical-align: middle;
+  cursor: pointer;
+  color: gray;
+}
+
+.infIcWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.support {
+  float: right;
+}
+
+.support_icon {
+  cursor: pointer;
+  color: red;
+  display: block;
+  padding-left: 40px;
+  padding-right: 40px;
+}

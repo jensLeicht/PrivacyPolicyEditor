@@ -1,0 +1,82 @@
+<div [formGroup]="frmSafeguard">
+    <ng-container formArrayName="safeguards">
+        <ng-container *ngFor="let safeguard of safeguards.controls; let i = index">
+
+            <div class="view">
+                <button class="elv-header" (click)="viewList('El', i)" [class.elv-header-selected]="show('El', i)">{{getBoxText(i)}}</button> 
+                <div class="delete-button-wrapper">
+                    <button class="delete-button" *ngIf="safeguards.length > 1" (click)="deleteSafeguard(i)">
+                        <mat-icon>delete_forever</mat-icon>
+                    </button>
+                </div> 
+              </div>
+              
+              <div *ngIf="show('El', i)">
+
+                <div class="body" [formGroupName]="i"> 
+                    <div>
+                        <mat-form-field class="input-field" appearance="fill">
+                            <mat-label>Internal Name</mat-label>
+                            <input matInput formControlName="name" required placeholder="Enter name">
+                        </mat-form-field>                        
+                    </div>    
+
+                    <div class="desc-head">
+                        <div class="scroll-box">
+                            <ejs-tooltip [content]=getHeaderTooltipText(headerIsClicked.includes(i)) [mouseTrail]='true' [showTipPointer]='false'>
+                                <h4 class="info" (click)="clickHeader(i)"
+                                [ngStyle]="{'background-color': isHeaderReady(i) ? 'var(--auxiliary-color-transparent)' : 'var(--warning-color)'}"> 
+                                Titles
+                                <span *ngIf="!headerIsClicked.includes(i)">
+                                    <mat-icon>arrow_drop_down</mat-icon>
+                                </span>
+                                <span *ngIf="headerIsClicked.includes(i)">
+                                    <mat-icon>arrow_drop_up</mat-icon>
+                                </span>
+                            </h4>
+                            </ejs-tooltip>
+                            
+                            <div class="border-div" *ngIf="headerIsClicked.includes(i)"> 
+                                <app-ui-header
+                                    [headers]="getHeader(i)"
+                                    [language]="language"
+                                    (event)="addHeader($event, i)">
+                                </app-ui-header>
+                            </div>
+                        </div>
+
+                        <div class="scroll-box">
+                            <ejs-tooltip [content]=getDescTooltipText(descriptionIsClicked.includes(i)) [mouseTrail]='true' [showTipPointer]='false'>
+                                <h4 class="info" (click)="clickDescription(i)"
+                                [ngStyle]="{'background-color': isDescriptionReady(i) ? 'var(--auxiliary-color-transparent)' : 'var(--warning-color)'}"> 
+                                    Descriptions
+                                    <span *ngIf="!descriptionIsClicked.includes(i)">
+                                        <mat-icon>arrow_drop_down</mat-icon>
+                                    </span>
+                                    <span *ngIf="descriptionIsClicked.includes(i)">
+                                        <mat-icon>arrow_drop_up</mat-icon>
+                                    </span>
+                                </h4>
+                            </ejs-tooltip>
+                            <div class="border-div" *ngIf="descriptionIsClicked.includes(i)">
+                                <app-ui-description
+                                    [descriptions]="getDescription(i)"
+                                    [language]="language"
+                                    (event)="addDescription($event, i)">
+                                </app-ui-description>
+                            </div>    
+                        </div>
+                    </div>
+                            
+                </div>
+
+              </div>
+              
+        </ng-container>
+
+        <button mat-button class="add-button" (click)="addSafeguard()">
+            <mat-icon>add</mat-icon> SAFEGUARD
+        </button>
+
+    </ng-container>
+</div>

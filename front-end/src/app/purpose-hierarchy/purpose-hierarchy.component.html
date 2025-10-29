@@ -1,0 +1,54 @@
+<div class="content">
+  <div>
+      <div class="header">
+        <h2 class="text">
+            Purpose Hierarchy (Drag-and-Drop)
+        </h2>
+        <div class="infIcWrapper">
+          <mat-icon class="infoIc" (click)="getInfo()">help</mat-icon>
+        </div>
+      </div>
+    <mat-card class="form">
+      <ejs-treeview
+      id="tree"
+      [fields]="field"
+      [allowDragAndDrop]="true"
+      (nodeDragStart)='dropStart($event)'
+      (nodeDragStop)='dropStop($event)'
+      (nodeDragging)='dragging($event)'
+      (nodeDropped)='nodeDropped()'
+      loadOnDemand="false"
+      expandOn="Click"
+      fullRowSelect="false"
+      fullRowNavigatable="true"
+      cssClass = 'custom'
+      #tree
+      >
+      <ng-template #nodeTemplate="" let-data="">
+        <div>
+            <div class="treeviewdiv">
+                <mat-icon *ngIf="!data.category">
+                  open_with
+                </mat-icon>
+                <div class="treeNameDiv">
+                  <span class="treeName">{{data.name}}</span>
+                </div>
+            </div>
+     </div>
+    </ng-template>
+    </ejs-treeview>
+    </mat-card>
+  </div>
+    
+  <div class="button-wrapper">
+    <div class="support">
+      <ejs-tooltip class="errorMessage" *ngIf="!isDataComplete()" content='The entered data is incomplete. Click for information.' [mouseTrail]='true' [showTipPointer]='false'>
+        <mat-icon class="support_icon" (click)="getSupport()">warning</mat-icon> 
+        Information incomplete!
+      </ejs-tooltip>
+      <br/>
+      <button mat-button (click)="save()" [ngClass]="{'save-button': isDataComplete() , 'warn-button' : !isDataComplete()}" [disabled]="!isEdited()">SAVE</button>
+      <button mat-button (click)="cancel()" class="cancel-button">CANCEL</button>
+    </div>
+  </div>
+</div>

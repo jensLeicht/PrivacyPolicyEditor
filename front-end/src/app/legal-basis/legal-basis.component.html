@@ -1,0 +1,112 @@
+<div class="content">
+  <div>
+    <div class="header">
+      <h2 class="text">
+        {{name}} - Legal Bases
+      </h2>
+      <div class="infIcWrapper">
+        <mat-icon class="infoIc" (click)="getInfo()">help</mat-icon>
+      </div>
+    </div>
+
+    <mat-card class="form">
+      <form>
+
+        <div *ngFor="let r of legalBasisList; let i=index" class="main-wrapper">
+
+          <div class="right">
+            <div style="display: flex; align-items: center;">
+              <mat-checkbox class="check-box" [checked]="checked(r.lbCategory)"
+                (change)="toggle($event, r.lbCategory, i)">
+                {{ r.displayName }}
+              </mat-checkbox>
+            </div>
+          </div>
+
+          <div *ngIf="checked(r.lbCategory)" class="desc-head">
+
+            <div class="scroll-box">
+              <ejs-tooltip [content]=getHeaderTooltipText(headerIsClicked.includes(i)) [mouseTrail]='true'
+                [showTipPointer]='false'>
+                <h4 class="info" (click)="clickHeader(i)"
+                  [ngStyle]="{'background-color': headerIsFilled.includes(i) ? 'var(--auxiliary-color-transparent)' : 'var(--warning-color)'}">
+                  Titles
+                  <span *ngIf="!headerIsClicked.includes(i)">
+                    <mat-icon>arrow_drop_down</mat-icon>
+                  </span>
+                  <span *ngIf="headerIsClicked.includes(i)">
+                    <mat-icon>arrow_drop_up</mat-icon>
+                  </span>
+                </h4>
+              </ejs-tooltip>
+
+              <div class="border-div" *ngIf="headerIsClicked.includes(i)">
+                <app-ui-header [headers]="getHeader(r.lbCategory)" [language]="defaultLanguage"
+                  (event)="addHeader($event, r.lbCategory, i)">
+                </app-ui-header>
+              </div>
+
+              <!-- sub -->
+              <h4 style="background-color: --auxiliary-color-transparent" *ngIf="headerIsClicked.includes(i) && hasSubLB">
+                Defined in subordinate purposes:
+              </h4>
+              <div class="border-div" *ngIf="headerIsClicked.includes(i)">
+                <app-ui-header [headers]="getSubHeader(r.lbCategory)" [language]="defaultLanguage"
+                  [disabled]="true">
+                </app-ui-header>
+              </div>
+            </div>
+
+            <div class="scroll-box">
+              <ejs-tooltip [content]=getDescTooltipText(descriptionIsClicked.includes(i)) [mouseTrail]='true'
+                [showTipPointer]='false'>
+                <h4 class="info" (click)="clickDescription(i)"
+                  [ngStyle]="{'background-color': descriptionIsFilled.includes(i) ? 'var(--auxiliary-color-transparent)' : 'var(--warning-color)'}">
+                  Descriptions
+                  <span *ngIf="!descriptionIsClicked.includes(i)">
+                    <mat-icon>arrow_drop_down</mat-icon>
+                  </span>
+                  <span *ngIf="descriptionIsClicked.includes(i)">
+                    <mat-icon>arrow_drop_up</mat-icon>
+                  </span>
+                </h4>
+              </ejs-tooltip>
+
+              <div class="border-div" *ngIf="descriptionIsClicked.includes(i)">
+                <app-ui-description [descriptions]="getDescription(r.lbCategory)" [language]="defaultLanguage"
+                  (event)="addDescription($event, r.lbCategory, i)">
+                </app-ui-description>
+              </div>
+
+              <!-- sub -->
+              <h4 style="background-color: --auxiliary-color-transparent" *ngIf="descriptionIsClicked.includes(i) && hasSubLB">
+                Defined in subordinate purposes:
+              </h4>
+              <div class="border-div" *ngIf="descriptionIsClicked.includes(i) && hasSubLB">
+                <app-ui-description [descriptions]="getSubDescription(r.lbCategory)" [language]="defaultLanguage"
+                  [disabled]="true">
+                </app-ui-description>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+
+  <div class="button-wrapper">
+    <div class="support">
+      <ejs-tooltip class="errorMessage" *ngIf="!isDataComplete()"
+        content='The entered data is incomplete. Click for information.' [mouseTrail]='true' [showTipPointer]='false'>
+        <mat-icon class="support_icon" (click)="getSupport()">warning</mat-icon>
+        Information incomplete!
+      </ejs-tooltip>
+      <br />
+      <button mat-button (click)="save()"
+        [ngClass]="{'save-button': isDataComplete() , 'warn-button' : !isDataComplete()}"
+        [disabled]="!isEdited()">SAVE</button>
+      <button mat-button (click)="cancel()" class="cancel-button">CANCEL</button>
+    </div>
+  </div>
+
+</div>

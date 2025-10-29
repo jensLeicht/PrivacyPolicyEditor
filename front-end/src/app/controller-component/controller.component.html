@@ -1,0 +1,102 @@
+<div [formGroup]="frmControllers" class="content">
+  <div>
+    <ng-container formArrayName="controllers">
+      <div class="header">
+        <h2 class="text">
+          Data Controller(s)
+        </h2>
+        <div class="infIcWrapper">
+          <mat-icon class="infoIc" (click)="getInfo()">help</mat-icon>
+        </div>
+      </div>
+        <ng-container *ngFor="let controllerForm of controllers.controls; let i = index">
+          
+          <div class="view">
+            <button class="elv-header" (click)="viewList('El', i)" [class.elv-header-selected]="show('El', i)">
+              <mat-icon *ngIf= "!isControllerComplete(i)" style="color: var(--warning-color);">
+                priority_high
+              </mat-icon>
+              {{getBoxText(i)}}
+            </button> 
+            <div class="delete-button-wrapper">
+              <button class="delete-button" (click)="deleteController(i)">
+                <mat-icon>delete_forever</mat-icon>
+              </button>
+            </div> 
+          </div>
+          
+          <div *ngIf="show('El', i)">
+           
+            <div [formGroupName]="i">               
+                                  
+              <mat-card class="form">
+
+                <div class="repDiv">
+                  <h3 class="representation">
+                      Controller Information
+                  </h3>
+
+                  <mat-form-field class="input-field" appearance="fill">
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="firstName" required placeholder="Enter name">
+                  </mat-form-field>
+              
+                  <mat-form-field *ngIf="lastNameEnabled(i)" class="input-field" appearance="fill">
+                    <mat-label>Last name</mat-label>
+                    <input matInput formControlName="lastName" required placeholder="Enter last name">
+                  </mat-form-field>
+              
+                  <mat-form-field class="input-field" appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input matInput formControlName="email" required placeholder="Enter email address">
+                    <div class="message" *ngIf="!validateEmail(controllerForm.value.email)"> 
+                      Email not valid
+                    </div>
+                  </mat-form-field>
+              
+                  <mat-form-field class="input-field" appearance="fill">
+                    <mat-label>Phone number</mat-label>
+                    <input matInput formControlName="phoneNumber" required placeholder="Enter phone number">
+                    <div class="message" *ngIf="!validatePhoneNumber(controllerForm.value.phoneNumber)"> 
+                      Phone number not valid
+                    </div>
+                  </mat-form-field>
+
+                  <mat-form-field class="input-field" appearance="fill">
+                    <mat-label>Address</mat-label>
+                    <input matInput formControlName="address" required placeholder="Enter address">
+                  </mat-form-field>
+
+                  <div class="entity-wrapper">              
+                    <app-entity
+                      [inputObj]="getEntityData(i)"
+                      [language]="defaultLanguage"
+                      (newItemEvent)="addEntity($event, i)">
+                    </app-entity>                
+                  </div>
+                  </div>
+                  
+              </mat-card>
+               
+            </div>
+
+          </div>
+        </ng-container>
+    </ng-container>
+  
+    <button class="add-button" mat-mini-fab (click)="addController()">
+        <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <div class="button-wrapper">
+    <div class="support">
+      <ejs-tooltip class="errorMessage" *ngIf="!isDataComplete()" content='The entered data is incomplete. Click for information.' [mouseTrail]='true' [showTipPointer]='false'>
+        <mat-icon class="support_icon" (click)="getSupport()">warning</mat-icon> 
+        Information incomplete!
+      </ejs-tooltip>
+      <br/>
+      <button mat-button (click)="save()" [ngClass]="{'save-button': isDataComplete() , 'warn-button' : !isDataComplete()}" [disabled]="!edited">SAVE</button>
+      <button mat-button (click)="cancel()" class="cancel-button">CANCEL</button>
+    </div>
+</div>

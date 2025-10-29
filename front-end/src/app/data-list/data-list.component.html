@@ -1,0 +1,244 @@
+<div [formGroup]="frmData" class="content">
+  <div>
+    <ng-container formArrayName="list">
+      <div class="header">
+        <h2 class="text">
+            Data
+        </h2>
+        <div class="infIcWrapper">
+          <mat-icon class="infoIc" (click)="getInfo()">help</mat-icon>
+        </div>
+      </div>
+        <ng-container *ngFor="let data of list.controls; let i = index">
+
+          <div class="view">
+            <button class="elv-header" (click)="viewList('El', i)" [class.elv-header-selected]="show('El', i)">
+              <mat-icon *ngIf= "!isDataElemComplete(i)" style="color: var(--warning-color);">
+                priority_high
+              </mat-icon>
+              {{getBoxText(i)}}
+            </button> 
+            <div class="delete-button-wrapper">
+              <button class="delete-button" (click)="deleteData(i)">
+                <mat-icon>delete_forever</mat-icon>
+              </button>
+            </div>  
+          </div>
+          
+          <div *ngIf="show('El', i)">
+
+            <div [formGroupName]="i">
+                
+              <mat-card class="form">  
+                <h3>
+                  Basic Information
+                </h3>
+
+                  <mat-form-field class="input-field" appearance="fill">
+                    <mat-label>Name (unique)</mat-label>
+                    <input matInput formControlName="name" required placeholder="Enter date name">
+                  </mat-form-field>
+
+                  <div class="entity-wrapper">
+                    <div class="border-dg">
+                      <ejs-tooltip [content]=getDataCategorieTooltipText(groupIsClicked.includes(i)) [mouseTrail]='true' [showTipPointer]='false'>
+                        <div class="entity-header" (click)="clickCategory(i)"
+                        [ngStyle]="{'background-color': categoryIsFilled(i) ? 'var(--auxiliary-color-transparent)' : 'var(--warning-color)'}">
+                          <h3 class="entity-text">
+                              Data Categories *
+                              <span *ngIf="!groupIsClicked.includes(i)">
+                                <mat-icon>arrow_drop_down</mat-icon>
+                              </span>
+                              <span *ngIf="groupIsClicked.includes(i)">
+                                <mat-icon>arrow_drop_up</mat-icon>
+                              </span>
+                          </h3>
+                      </div>
+                      </ejs-tooltip>
+                      
+                        <div *ngIf="groupIsClicked.includes(i)">
+                          <app-data-categories-menu
+                            [inputObj]="dataList"
+                            [index]="i"
+                            (newItemEvent)="addDataCategories($event, i)">
+                          </app-data-categories-menu>
+                        </div>                    
+                      </div>
+                  </div>
+
+                  <mat-form-field class="input-field" appearance="fill">
+                    <mat-label>Data Type</mat-label>
+                    <mat-select formControlName="dataType" required placeholder="Choose data type">
+                      <mat-option *ngFor="let d of dataTypeList" [value]="d.value">
+                        <ejs-tooltip [content]='d.tip' [mouseTrail]='true' [showTipPointer]='false'>
+                        <div>{{d.viewValue}}</div>
+                        </ejs-tooltip>
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <mat-form-field class="input-field" appearance="fill">
+                    <mat-label>Data Sensitivity</mat-label>
+                    <mat-select formControlName="privacyGroup" required placeholder="Choose privacy group">
+                      <mat-option *ngFor="let p of pGroupList" [value]="p.value">
+                        <ejs-tooltip [content]='p.tip' [mouseTrail]='true' [showTipPointer]='false'>
+                        <div>{{p.viewValue}}</div>
+                        </ejs-tooltip>
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                  <div class="checkbox-wrapper">
+                    <div class="double-body">
+                      <ejs-tooltip content='This data must be provided by the data subject (no opt-out).' [mouseTrail]='true' [showTipPointer]='false'>
+                        <mat-checkbox formControlName="required">   
+                          required
+                        </mat-checkbox>
+                      </ejs-tooltip>
+                    </div> 
+                  </div>
+
+                  <div class="data-wrapper">
+                    <div class="border">
+                      <ejs-tooltip [content]=getAMTooltipText(amIsClicked.includes(i)) [mouseTrail]='true' [showTipPointer]='false'>
+                        <div class="data-header" (click)="clickAm(i)"
+                        [ngStyle]="{'background-color': amIsFilled(i) ? (amIsEmpty(i) ? '' : 'var(--auxiliary-color-transparent)') : 'var(--warning-color)'}">
+                          <h3 class="data-text">
+                            <div class="data-text">
+                              Anonymization Method (optional)
+                            </div>
+                            <div class="infIcWrapper">
+                              <mat-icon class="infoIc" (click)="getAmInfo($event)">help</mat-icon>
+                            </div>
+                              <span *ngIf="!amIsClicked.includes(i)">
+                                <mat-icon>arrow_drop_down</mat-icon>
+                              </span>
+                              <span *ngIf="amIsClicked.includes(i)">
+                                <mat-icon>arrow_drop_up</mat-icon>
+                              </span>
+                          </h3>
+                      </div>
+                      </ejs-tooltip>
+
+                        <div *ngIf="amIsClicked.includes(i)">
+                          <app-anonymization-method
+                            [inputObj]="getDataObj(i)"
+                            [language]="defaultLanguage"
+                            (newItemEvent)="addAm($event, i)">
+                          </app-anonymization-method>
+                        </div>                    
+                      </div>
+                  </div>
+
+              </mat-card>
+
+              <mat-card class="form">
+                <h3>
+                  UI-Representation of Data
+                </h3>
+              <div class="desc-head">
+
+                <div class="scroll-box">
+                  <ejs-tooltip [content]=getHeaderTooltipText(headerIsClicked.includes(i)) [mouseTrail]='true' [showTipPointer]='false'>
+                    <h4 class="info" (click)="clickHeader(i)"
+                    [ngStyle]="{'background-color': isHeaderReady(i) ? 'var(--auxiliary-color-transparent)' : 'var(--warning-color)'}"> 
+                        Titles
+                        <span *ngIf="!headerIsClicked.includes(i)">
+                            <mat-icon>arrow_drop_down</mat-icon>
+                        </span>
+                        <span *ngIf="headerIsClicked.includes(i)">
+                            <mat-icon>arrow_drop_up</mat-icon>
+                        </span>
+                    </h4>
+                  </ejs-tooltip>
+                  
+                  <div class="border-div" *ngIf="headerIsClicked.includes(i)"> 
+                    <app-ui-header
+                      [headers]="getHeader(i)"
+                      [language]="defaultLanguage"
+                      (event)="addHeader($event, i)">
+                    </app-ui-header>
+                  </div>
+                </div> 
+                
+                <div class="scroll-box">
+                  <ejs-tooltip [content]=getDescTooltipText(descriptionIsClicked.includes(i)) [mouseTrail]='true' [showTipPointer]='false'>
+                    <h4 class="info" (click)="clickDescription(i)"
+                    [ngStyle]="{'background-color': isDescriptionReady(i) ? 'var(--auxiliary-color-transparent)' : 'var(--warning-color)'}"> 
+                        Descriptions
+                        <span *ngIf="!descriptionIsClicked.includes(i)">
+                            <mat-icon>arrow_drop_down</mat-icon>
+                        </span>
+                        <span *ngIf="descriptionIsClicked.includes(i)">
+                            <mat-icon>arrow_drop_up</mat-icon>
+                        </span>
+                    </h4>
+                  </ejs-tooltip>
+
+                  <div class="border-div" *ngIf="descriptionIsClicked.includes(i)">
+                    <app-ui-description
+                      [descriptions]="getDescription(i)"
+                      [language]="defaultLanguage"
+                      (event)="addDescription($event, i)">
+                    </app-ui-description>
+                  </div>
+                </div>
+                   
+              </div>
+
+              <div class="entity-wrapper">
+                <div class="border">
+                  <ejs-tooltip [content]=getDataGroupsTooltipText(dataGroupIsClicked.includes(i)) [mouseTrail]='true' [showTipPointer]='false'>
+                    <div class="entity-header" (click)="clickDataGroup(i)"
+                    [ngStyle]="{'background-color': dataGroupIsFilled(i) ? (getDataGroups(i).selectedGroups.length > 0 ? 'var(--auxiliary-color-transparent)' : '') : 'var(--warning-color)'}">
+                      <h3 class="data-text">
+                          <div class="data-text">
+                          Data Groups (optional)
+                          </div>
+                          <div class="infIcWrapper">
+                            <mat-icon class="infoIc" (click)="getDGInfo($event)">help</mat-icon>
+                          </div>
+                          <span *ngIf="!dataGroupIsClicked.includes(i)">
+                            <mat-icon>arrow_drop_down</mat-icon>
+                          </span>
+                          <span *ngIf="dataGroupIsClicked.includes(i)">
+                            <mat-icon>arrow_drop_up</mat-icon>
+                          </span>
+                      </h3>
+                  </div>
+                  </ejs-tooltip>
+
+                    <div *ngIf="dataGroupIsClicked.includes(i)">
+                      <app-data-group-menu
+                        [inputObj]="getDataGroups(i)"
+                        [language]="defaultLanguage"
+                        (newItemEvent)="addDataGroups($event, i)"
+                        (toggleItemEvent)="toggleDataGroup($event, i)">
+                      </app-data-group-menu>
+                    </div>                    
+                  </div>
+              </div>
+            </mat-card>
+            </div>
+
+          </div>
+        </ng-container>
+    </ng-container>
+  
+    <button class="add-button" mat-mini-fab (click)="addData()">
+        <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <div class="button-wrapper">
+    <div class="support">
+      <ejs-tooltip class="errorMessage" *ngIf="!isDataComplete()" content='The entered data is incomplete. Click for information.' [mouseTrail]='true' [showTipPointer]='false'>
+        <mat-icon class="support_icon" (click)="getSupport()">warning</mat-icon> 
+        Information incomplete!
+      </ejs-tooltip>
+      <br/>
+      <button mat-button (click)="save()" [ngClass]="{'save-button': isDataComplete() , 'warn-button' : !isDataComplete()}" [disabled]="!edited">SAVE</button>
+      <button mat-button (click)="cancel()" class="cancel-button">CANCEL</button>
+    </div>
+  </div>
+</div>

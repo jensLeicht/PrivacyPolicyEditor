@@ -1,0 +1,69 @@
+<div [formGroup]="frmGroup">
+    <ng-container formArrayName="groups">
+        <ng-container *ngFor="let group of groups.controls; let i = index">
+
+            <div class="body" [formGroupName]="i"> 
+                <div>
+                    <mat-form-field class="input-field" appearance="fill">
+                        <mat-label>Name</mat-label>
+                        <input matInput formControlName="name" required placeholder="Enter name">
+                    </mat-form-field>                        
+                </div>    
+
+                <div class="desc-head">
+                    <div class="scroll-box">
+                        <h4 class="info" (click)="clickHeader(i)"
+                            [ngStyle]="{'background-color': isHeaderReady(i) ? 'var(--auxiliary-color-transparent)' : ''}"> 
+                            Header List
+                            <span *ngIf="!headerIsClicked.includes(i)">
+                                <mat-icon>arrow_drop_down</mat-icon>
+                            </span>
+                            <span *ngIf="headerIsClicked.includes(i)">
+                                <mat-icon>arrow_drop_up</mat-icon>
+                            </span>
+                        </h4>
+                        
+                        <div class="border-div" *ngIf="headerIsClicked.includes(i)"> 
+                            <app-ui-header
+                                [headers]="getHeader(i)"
+                                (event)="addHeader($event, i)">
+                            </app-ui-header>
+                        </div>
+                    </div>
+
+                    <div class="scroll-box">
+                        <h4 class="info" (click)="clickDescription(i)"
+                        [ngStyle]="{'background-color': isDescriptionReady(i) ? 'var(--auxiliary-color-transparent)' : ''}"> 
+                            Description List
+                            <span *ngIf="!descriptionIsClicked.includes(i)">
+                                <mat-icon>arrow_drop_down</mat-icon>
+                            </span>
+                            <span *ngIf="descriptionIsClicked.includes(i)">
+                                <mat-icon>arrow_drop_up</mat-icon>
+                            </span>
+                        </h4>
+                        <div class="border-div" *ngIf="descriptionIsClicked.includes(i)">
+                            <app-ui-description
+                                [descriptions]="getDescription(i)"
+                                (event)="addDescription($event, i)">
+                            </app-ui-description>
+                        </div>    
+                    </div>
+                </div>
+                        
+            </div>
+
+            <div class="delete-button-wrapper">
+                <button class="delete-button" *ngIf="groups.length > 1" (click)="deleteGroup(i)">
+                    <mat-icon>delete_forever</mat-icon>
+                </button>
+            </div>
+              
+        </ng-container>
+
+        <button mat-button class="add-button" (click)="addGroup()">
+            <mat-icon>add</mat-icon> NEW DATA GROUP
+        </button>
+
+    </ng-container>
+</div>

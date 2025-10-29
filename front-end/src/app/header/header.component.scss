@@ -1,0 +1,31 @@
+.container {
+    padding: 10px;
+    background-color: var(--secondary-color);
+    height: 76px;
+}
+
+.logo {
+    width: 64px;
+    float: left;
+    color: var(--text-inverse-color);
+    padding-top: 4px;
+}
+  
+.tool_name {
+    color: var(--text-inverse-color);
+}
+
+.text {
+    font-weight: bold;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+::ng-deep .mat-menu-content {
+    background-color: var(--secondary-color);
+}
+
+.pripocog {
+    display: inline-block;
+    padding-top: 26px;
+}

@@ -1,0 +1,140 @@
+<div class="content">
+    <div>
+      <div class="header">
+        <h2 class="text">
+            {{name}} - Retention
+        </h2>
+        <div class="infIcWrapper">
+            <mat-icon class="infoIc" (click)="getInfo()">help</mat-icon>
+          </div>
+      </div>
+      
+      <mat-card class="form">
+        <form class="example-form" [formGroup]="frmRetention">
+                
+            <mat-form-field class="input-field" appearance="fill">
+              <mat-label>Type</mat-label>
+              <mat-select formControlName="type" required placeholder="Choose type">
+                <mat-option *ngFor="let t of typeList" [value]="t.value">
+                {{t.viewValue}}
+                </mat-option>
+            </mat-select>
+            </mat-form-field>
+
+            <mat-form-field *ngIf="fixedDateSelected()" class="input-field" appearance="fill">
+                <mat-label>Point in time</mat-label>
+                <input matInput formControlName="pointInTime" required [matDatepicker]="picker" readonly>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+
+            <div *ngIf="afterPurposeSelected()" class="duration">
+                <div class="durationField">
+                    <mat-form-field class="input-field" appearance="fill">
+                        <mat-label>Years</mat-label>
+                        <mat-select formControlName="years" required placeholder="Choose duration">
+                          <mat-option *ngFor="let t of listOfYears" [value]="t">
+                          {{t}}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+               
+                <div class="durationField">
+                    <mat-form-field class="input-field" appearance="fill">
+                        <mat-label>Months</mat-label>
+                        <mat-select formControlName="months" required placeholder="Choose duration">
+                          <mat-option *ngFor="let t of listOfMonths" [value]="t">
+                          {{t}}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="durationField">
+                    <mat-form-field class="input-field" appearance="fill">
+                        <mat-label>Days</mat-label>
+                        <mat-select formControlName="days" required placeholder="Choose duration">
+                          <mat-option *ngFor="let t of listOfDays" [value]="t">
+                          {{t}}
+                          </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                
+            </div>
+
+        </form>
+      
+      </mat-card>
+
+      <mat-card class="form">
+        <h3>
+          UI-Representation
+        </h3>
+      <div class="desc-head">
+
+        <div class="scroll-box">
+            <ejs-tooltip [content]=getHeaderTooltipText(headerIsClicked) [mouseTrail]='true' [showTipPointer]='false'>
+                <h4 class="info" (click)="clickHeader()"
+                [ngStyle]="{'background-color': headerIsFilled ? 'var(--auxiliary-color-transparent)' : 'var(--warning-color)'}"> 
+                    Titles
+                    <span *ngIf="!headerIsClicked">
+                        <mat-icon>arrow_drop_down</mat-icon>
+                    </span>
+                    <span *ngIf="headerIsClicked">
+                        <mat-icon>arrow_drop_up</mat-icon>
+                    </span>
+                </h4>
+            </ejs-tooltip>
+            
+            <div class="border-div" *ngIf="headerIsClicked"> 
+                <app-ui-header
+                    [headers]="headerList"
+                    [language]="defaultLanguage"
+                    (event)="addHeader($event)">
+                </app-ui-header>
+            </div>
+        </div>
+        
+        <div class="scroll-box">
+            <ejs-tooltip [content]=getDescTooltipText(descriptionIsClicked) [mouseTrail]='true' [showTipPointer]='false'>
+                <h4 class="info" (click)="clickDescription()" 
+                [ngStyle]="{'background-color': descriptionIsFilled ? 'var(--auxiliary-color-transparent)' : 'var(--warning-color)'}"> 
+                Descriptions
+                <span *ngIf="!descriptionIsClicked">
+                    <mat-icon>arrow_drop_down</mat-icon>
+                </span>
+                <span *ngIf="descriptionIsClicked">
+                    <mat-icon>arrow_drop_up</mat-icon>
+                </span>
+            </h4>
+            </ejs-tooltip>
+
+            <div class="border-div" *ngIf="descriptionIsClicked">
+                <app-ui-description
+                    [descriptions]="descriptionList"
+                    [language]="defaultLanguage"
+                    (event)="addDescription($event)">
+                </app-ui-description>
+            </div>    
+        </div>
+  
+      </div>
+    </mat-card>
+
+    </div>
+  
+    <div class="button-wrapper">
+        <div class="support">
+            <ejs-tooltip class="errorMessage" *ngIf="!isDataComplete()" content='The entered data is incomplete. Click for information.' [mouseTrail]='true' [showTipPointer]='false'>
+                <mat-icon class="support_icon" (click)="getSupport()">warning</mat-icon> 
+                Information incomplete!
+              </ejs-tooltip>
+              <br/>
+              <button mat-button (click)="save()" [ngClass]="{'save-button': isDataComplete() , 'warn-button' : !isDataComplete()}" [disabled]="!isEdited()">SAVE</button>
+              <button mat-button (click)="cancel()" class="cancel-button">CANCEL</button>
+        </div>
+      </div>
+    
+  </div>

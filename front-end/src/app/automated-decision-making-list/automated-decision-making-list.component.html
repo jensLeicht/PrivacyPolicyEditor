@@ -1,0 +1,117 @@
+<div [formGroup]="frmAdm" class="content">
+
+  <div>
+    <ng-container formArrayName="adms">
+      <div class="header">
+        <h2 class="text">
+            {{name}} - Automated Decision-making
+        </h2>
+        <div class="infIcWrapper">
+          <mat-icon class="infoIc" (click)="getInfo()">help</mat-icon>
+        </div>
+      </div>
+        <ng-container *ngFor="let adm of adms.controls; let i = index">
+
+          <div class="view">
+            <button class="elv-header" (click)="viewList('El', i)" [class.elv-header-selected]="show('El', i)">
+              <mat-icon *ngIf= "!isADMComplete(i)" style="color: var(--warning-color);">
+                priority_high
+              </mat-icon>
+              {{getBoxText(i)}}
+            </button> 
+            <div class="delete-button-wrapper">
+              <button class="delete-button" (click)="deleteAdm(i)">
+                <mat-icon>delete_forever</mat-icon>
+              </button>
+            </div>  
+          </div>
+          
+          <div *ngIf="show('El', i)">
+
+            <div [formGroupName]="i">
+                
+              <mat-card class="form">
+                
+                  <mat-form-field class="input-field" appearance="fill">
+                    <mat-label>Name</mat-label>
+                    <input matInput formControlName="name" required placeholder="Enter name">
+                  </mat-form-field>
+                  
+              </mat-card>
+              <mat-card class="form">
+                <h3>
+                  UI-Representation
+                </h3>
+              <div class="desc-head">
+
+                <div class="scroll-box">
+                  <ejs-tooltip [content]=getHeaderTooltipText(headerIsClicked.includes(i)) [mouseTrail]='true' [showTipPointer]='false'>
+                    <h4 class="info" (click)="clickHeader(i)"
+                    [ngStyle]="{'background-color': isHeaderReady(i) ? 'var(--auxiliary-color-transparent)' : 'var(--warning-color)'}"> 
+                        Titles
+                        <span *ngIf="!headerIsClicked.includes(i)">
+                            <mat-icon>arrow_drop_down</mat-icon>
+                        </span>
+                        <span *ngIf="headerIsClicked.includes(i)">
+                            <mat-icon>arrow_drop_up</mat-icon>
+                        </span>
+                    </h4>
+                  </ejs-tooltip>
+                  
+                  <div class="border-div" *ngIf="headerIsClicked.includes(i)"> 
+                    <app-ui-header
+                      [headers]="getHeader(i)"
+                      [language]="defaultLanguage"
+                      (event)="addHeader($event, i)">
+                    </app-ui-header>
+                  </div>
+                </div> 
+                
+                <div class="scroll-box">
+                  <ejs-tooltip [content]=getDescTooltipText(descriptionIsClicked.includes(i)) [mouseTrail]='true' [showTipPointer]='false'>
+                    <h4 class="info" (click)="clickDescription(i)"
+                    [ngStyle]="{'background-color': isDescriptionReady(i) ? 'var(--auxiliary-color-transparent)' : 'var(--warning-color)'}"> 
+                        Descriptions
+                        <span *ngIf="!descriptionIsClicked.includes(i)">
+                            <mat-icon>arrow_drop_down</mat-icon>
+                        </span>
+                        <span *ngIf="descriptionIsClicked.includes(i)">
+                            <mat-icon>arrow_drop_up</mat-icon>
+                        </span>
+                    </h4>
+                  </ejs-tooltip>
+
+                  <div class="border-div" *ngIf="descriptionIsClicked.includes(i)">
+                    <app-ui-description
+                      [descriptions]="getDescription(i)"
+                      [language]="defaultLanguage"
+                      (event)="addDescription($event, i)">
+                    </app-ui-description>
+                  </div>
+                </div> 
+
+              </div>
+              </mat-card>
+            </div>
+
+          </div>
+        </ng-container>
+    </ng-container>
+  
+    <button class="add-button" mat-mini-fab (click)="addAdm()">
+        <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <div class="button-wrapper">
+    <div class="support">
+      <ejs-tooltip class="errorMessage" *ngIf="!isDataComplete()" content='The entered data is incomplete. Click for information.' [mouseTrail]='true' [showTipPointer]='false'>
+        <mat-icon class="support_icon" (click)="getSupport()">warning</mat-icon> 
+        Information incomplete!
+      </ejs-tooltip>
+      <br/>
+      <button mat-button (click)="save()" [ngClass]="{'save-button': isDataComplete() , 'warn-button' : !isDataComplete()}" [disabled]="!edited">SAVE</button>
+      <button mat-button (click)="cancel()" class="cancel-button">CANCEL</button>
+    </div>
+  </div>
+</div>

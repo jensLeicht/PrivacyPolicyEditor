@@ -1,0 +1,16 @@
+.container {
+    display: flex;
+    height: calc(100% - 106px);
+}
+
+.left {
+    background: var(--secondary-color);
+    min-width: 130px;
+}
+  
+.right {
+    padding: 20px;
+    padding-left: 30px;
+    background: var(--auxiliary-color-transparent);
+    width: 90%;
+}

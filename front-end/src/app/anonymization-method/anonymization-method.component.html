@@ -1,0 +1,116 @@
+<div>
+     
+    <mat-form-field class="field" appearance="fill">
+        <mat-label>Name</mat-label>
+        <input (ngModelChange)="dataChanged($event, 'name')" [(ngModel)]='name' matInput required placeholder="Enter name">
+    </mat-form-field>
+
+    <div class="aux-wrapper">
+        <div class="aux-data-wrapper">
+            <div class="border">
+                <ejs-tooltip [content]=getHETooltipText(hierarchyEntityIsClicked) [mouseTrail]='true' [showTipPointer]='false'>
+                    <div class="data-header" (click)="clickEntityHierarchy()"
+                    [ngStyle]="{'background-color': hierarchyEntityIsFilled ? isHierarchyEmpty() ? '' : 'var(--auxiliary-color-transparent)' : 'var(--warning-color)'}">
+                        <h3 class="data-text">
+                        Hierarchy Entity (optional)
+                            <span *ngIf="!hierarchyEntityIsClicked">
+                            <mat-icon>arrow_drop_down</mat-icon>
+                            </span>
+                            <span *ngIf="hierarchyEntityIsClicked">
+                            <mat-icon>arrow_drop_up</mat-icon>
+                            </span>
+                        </h3>
+                    </div>
+                </ejs-tooltip>
+
+                <div *ngIf="hierarchyEntityIsClicked">
+                    <app-hierarchy-entity
+                        [dataObj]="hierarchyEntity"
+                        (newItemEvent)="addHierarchyEntity($event)">
+                    </app-hierarchy-entity>
+                </div>
+            </div>
+        </div>
+
+        <div class="aux-data-wrapper">
+            <div class="border">
+                <ejs-tooltip [content]=getAMAttrTooltipText(attributeIsClicked) [mouseTrail]='true' [showTipPointer]='false'>
+                    <div class="data-header" (click)="clickAttribute()"
+                    [ngStyle]="{'background-color': attributeIsFilled ? isAttributeEmpty() ? '' : 'var(--auxiliary-color-transparent)' : 'var(--warning-color)'}">
+                        <h3 class="data-text">
+                        Anonymization Method Attribute (optional)
+                            <span *ngIf="!attributeIsClicked">
+                            <mat-icon>arrow_drop_down</mat-icon>
+                            </span>
+                            <span *ngIf="attributeIsClicked">
+                            <mat-icon>arrow_drop_up</mat-icon>
+                            </span>
+                        </h3>
+                    </div>
+                </ejs-tooltip>
+
+                <div *ngIf="attributeIsClicked">
+                    <app-anonymization-method-attribute
+                        [dataObj]="attribute"
+                        (newItemEvent)="addAttribute($event)">
+                    </app-anonymization-method-attribute>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h3>
+        UI-Representation of Anonymization Method
+    </h3>
+
+    <div class="desc-head">
+       
+        <div class="scroll-box">
+            <ejs-tooltip [content]=getHeaderTooltipText(headerIsClicked) [mouseTrail]='true' [showTipPointer]='false'>
+                <h4 class="info" (click)="clickHeader()"
+                [ngStyle]="{'background-color': headerIsFilled ? 'var(--auxiliary-color-transparent)' : 'var(--warning-color)'}"> 
+                    Titles
+                    <span *ngIf="!headerIsClicked">
+                        <mat-icon>arrow_drop_down</mat-icon>
+                    </span>
+                    <span *ngIf="headerIsClicked">
+                        <mat-icon>arrow_drop_up</mat-icon>
+                    </span>
+                </h4>
+            </ejs-tooltip>
+            
+            <div class="border-div" *ngIf="headerIsClicked"> 
+                <app-ui-header
+                    [headers]="headerList"
+                    [language]="language"
+                    (event)="addHeader($event)">
+                </app-ui-header>
+            </div>
+        </div>
+        
+        <div class="scroll-box">
+            <ejs-tooltip [content]=getDescTooltipText(descriptionIsClicked) [mouseTrail]='true' [showTipPointer]='false'>
+                <h4 class="info" (click)="clickDescription()" 
+                [ngStyle]="{'background-color': descriptionIsFilled ? 'var(--auxiliary-color-transparent)' : 'var(--warning-color)'}"> 
+                Descriptions
+                <span *ngIf="!descriptionIsClicked">
+                    <mat-icon>arrow_drop_down</mat-icon>
+                </span>
+                <span *ngIf="descriptionIsClicked">
+                    <mat-icon>arrow_drop_up</mat-icon>
+                </span>
+            </h4>
+            </ejs-tooltip>
+
+            <div class="border-div" *ngIf="descriptionIsClicked">
+                <app-ui-description
+                    [descriptions]="descriptionList"
+                    [language]="language"
+                    (event)="addDescription($event)">
+                </app-ui-description>
+            </div>    
+        </div>
+
+    </div>
+
+</div>

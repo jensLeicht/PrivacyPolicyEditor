@@ -1,0 +1,45 @@
+<div class="content">
+  <div>
+    <div class="header">
+      <h2 class="text">
+        Policy Header and Description
+      </h2>
+    </div>
+    
+    <div class="desc-head">
+    
+      <div class="box">
+        <div class="subheader">
+          <h3 class="subtext">
+            Policy Header
+          </h3>
+        </div>      
+          <div class="scroll-box">
+            <app-ui-header
+                [headers]="headerList"
+                (event)="addHeader($event)">
+            </app-ui-header>    
+          </div>
+      </div>
+      
+      <div class="box">   
+        <div class="subheader">
+          <h3 class="subtext">
+            Policy Description
+          </h3>
+        </div>     
+          <div class="scroll-box">
+            <app-ui-description
+                [descriptions]="descriptionList"
+                (event)="addDescription($event)">
+            </app-ui-description>  
+          </div>
+      </div>
+    
+    </div>
+  </div>
+ 
+  <div class="button-wrapper">
+    <button mat-button (click)="save()" class="save-button" [disabled]="!isDataComplete()">SAVE</button>
+  </div>
+</div>

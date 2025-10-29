@@ -1,0 +1,129 @@
+::ng-deep .mat-dialog-container {
+  height: 95vh;
+  width: 95vw;
+}
+
+::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+  width: 100px;
+}  
+    
+.form {
+  background-color: var(--secondary-color);
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+.header {
+  background-color: var(--auxiliary-color-transparent);
+  padding: 5px;
+}
+
+.text {
+  margin: 20px;
+}
+  
+.input-field {
+  width: 100%;
+}
+
+.lang {
+  width: 100%;
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+}
+  
+.save-button {
+  float: right;
+  margin: 15px;
+  color: var(--text-inverse-color);
+  background-color: var(--auxiliary-color);
+  box-shadow: 2px 2px 2px 1px var(--secondary-color);
+}
+  
+.save-button:disabled {
+  border: 1px solid var(--primary-color);
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+.button-wrapper {
+  padding-bottom: 20px;
+  bottom: 0px;
+  margin-bottom: 30px;
+}
+  
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+  color: var(--auxiliary-color) !important;
+}
+
+::ng-deep .mat-focused .mat-form-field-underline .mat-form-field-ripple{
+  background-color: var(--auxiliary-color) !important;
+  color: var(--primary-color) !important;
+}
+  
+::ng-deep .mat-select-arrow {
+  color: var(--auxiliary-color) !important;
+}
+  
+.delete-button {
+  color: var(--auxiliary-color);
+  background-color: transparent;
+  border: transparent;
+  cursor: pointer;
+}
+  
+.delete-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 5px;
+}
+  
+.add-button {
+  background-color: var(--auxiliary-color);
+  color: var(--primary-color);
+  margin-left: 10px;
+}
+
+::ng-deep .toast-success {
+  background-color: var(--auxiliary-color);
+}
+
+.elv-header {
+  font-size: 14px;
+  // background: var(--secondary-color);
+  cursor: pointer;
+  padding: 16px;
+  width: 100%;
+  border: none;
+  outline: none;
+  transition: 0.5s;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.elv-header:after {
+  content: '\02795';
+  font-size: 12px;
+  float: right;
+  margin-right: 8px;
+}
+
+.elv-header-selected:after {
+  content: '\02796';
+  font-size: 12px;
+  float: right;
+  margin-right: 8px;
+}
+
+.elv-header:hover {
+  background-color: var(--auxiliary-color-transparent);
+}
+
+.elv-header-incomplete {
+  background-color: var(--warning-color);
+}
+
+.view {
+  display: flex;
+}

@@ -1,0 +1,9 @@
+
+back-end/__pycache__/
+back-end/create_objects/__pycache__/
+back-end/create_objects/purpose_sup_obj/__pycache__/
+back-end/prolog_parser/__pycache__/
+back-end/prolog_parser/purposeElements/__pycache__/
+back-end/venv/
+front-end/node_modules/
+front-end/dist/

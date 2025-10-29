@@ -1,0 +1,148 @@
+::ng-deep .mat-dialog-container {
+    height: 95vh;
+    width: 95vw;
+}
+
+.form {
+    background-color: var(--secondary-color);
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+.header {
+    background-color: var(--auxiliary-color-transparent);
+    padding: 5px;
+}
+
+.text {
+    margin: 20px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.save-button {
+    float: right;
+    margin: 15px;
+    color: var(--text-inverse-color);
+    background-color: var(--auxiliary-color);
+    box-shadow: 2px 2px 2px 1px var(--secondary-color);
+}
+
+.save-button:disabled {
+    border: 1px solid var(--primary-color);
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+.button-wrapper {
+    bottom: 0px;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-ripple .mat-ripple-element {
+    background-color: var(--auxiliary-color) !important;
+}
+
+::ng-deep .mat-checkbox-checked.mat-accent .mat-checkbox-background,.mat-checkbox-indeterminate.mat-accent .mat-checkbox-background {
+    background-color: var(--auxiliary-color);
+}
+
+.check-box {
+    padding-bottom: 20px;
+}
+
+.add-button {
+    background-color: var(--auxiliary-color);
+    color: var(--primary-color);
+    width: 160px;
+}
+
+.add {
+    display: flex;
+}
+
+.wrapper {
+    display: flex;
+}
+
+.info {
+    width: 100%;
+    margin-block: 10px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    cursor: pointer;
+}
+
+.info:hover {
+    background-color: var(--auxiliary-color-transparent);
+}
+
+.icons-body {
+    padding-right: 40px;
+}
+
+.scroll-box {
+    max-height: 400px;
+    overflow: auto;
+    padding: 5px;
+    width: 45%;
+}
+
+.border-div {
+    border: 0.5px solid var(--primary-color-transparent);
+    padding: 5px;
+}
+
+.desc-head {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.main-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.icons-icon {
+    width: 100%;
+    padding-left: 20px;
+}
+
+.add-button {
+    background-color: var(--auxiliary-color);
+    color: var(--primary-color);
+    margin-left: 10px;
+}
+
+.custom-input {
+    display: flex;
+    padding-left: 20px;
+}
+  
+.add-icon {
+    align-items: center;
+    display: flex;
+    width: 30%;
+}
+
+.inputField {
+    width: 40%;
+}
+
+.addGroupIcon {
+    cursor: pointer;
+}
+
+.inputFieldGroupName {
+    width: 60%;
+}
+
+.ic {
+    padding-left: 10px;
+    cursor: pointer;
+}

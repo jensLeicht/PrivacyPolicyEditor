@@ -1,0 +1,42 @@
+<div [formGroup]="frmAma">
+    <ng-container formArrayName="amas">
+        <ng-container *ngFor="let ama of amas.controls; let i = index">
+
+            <div class="view">
+                <button class="elv-header" (click)="viewList('El', i)" [class.elv-header-selected]="show('El', i)">{{getBoxText(i)}}</button> 
+                <div class="delete-button-wrapper">
+                    <button class="delete-button" *ngIf="amas.length > 1" (click)="deleteAma(i)">
+                        <mat-icon>delete_forever</mat-icon>
+                    </button>
+                </div>
+              </div>
+              
+              <div *ngIf="show('El', i)">
+
+                <div class="body" [formGroupName]="i"> 
+                    <div class="body-content">
+                        <mat-form-field class="input-field" appearance="fill">
+                            <mat-label>key</mat-label>
+                            <input matInput formControlName="key" required placeholder="Enter key">
+                        </mat-form-field>  
+                    </div>
+
+                    <div class="body-content">
+                        <mat-form-field class="input-field" appearance="fill">
+                            <mat-label>value</mat-label>
+                            <input matInput formControlName="value" required placeholder="Enter Value">
+                        </mat-form-field>  
+                    </div>
+                                                            
+                </div>
+
+              </div>
+              
+        </ng-container>
+
+        <button mat-button class="add-button" (click)="addAma()">
+            <mat-icon>add</mat-icon> NEW ANONYMIZATION METHOD ATTRIBUTE
+        </button>
+
+    </ng-container>
+</div>

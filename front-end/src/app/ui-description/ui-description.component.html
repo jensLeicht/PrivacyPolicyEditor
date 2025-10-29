@@ -1,0 +1,57 @@
+<div [formGroup]="frmDesc">
+  <ng-container formArrayName="descs">
+    <div *ngIf="!disabled">
+      <ng-container *ngFor="let descForm of descs.controls; let i = index">
+        <div class="view">
+          <button id="headline" class="elv-header" (click)="viewList('El', i)"
+            [class.elv-header-selected]="show('El', i)"
+            [class.elv-header-incomplete]="!isComplete(i)">{{getBoxText(i)}}</button>
+          <div class="delete-button-wrapper">
+            <button class="delete-button" (click)="deleteDesc(i)">
+              <mat-icon>delete_forever</mat-icon>
+            </button>
+          </div>
+        </div>
+
+        <div *ngIf="show('El', i)">
+
+          <div [formGroupName]="i">
+
+            <div class="lang">
+              <mat-icon class="hdl">language</mat-icon>
+              <ng-select class="hd" formControlName="lang" name="lang" required>
+                <ng-option *ngFor="let l of lang" [value]="l.value" [disabled]="isOptionDisabled(l.value, i)">
+                  {{l.viewValue}}
+                </ng-option>
+              </ng-select>
+            </div>
+
+            <div class="form">
+
+              <mat-form-field class="input-field" appearance="fill">
+                <mat-label>Description/Additional Information</mat-label>
+
+                <textarea formControlName="value" required placeholder="Description ..." matInput cdkTextareaAutosize
+                  cdkAutosizeMinRows="1" cdkAutosizeMaxRows="5">
+                    </textarea>
+              </mat-form-field>
+
+            </div>
+
+          </div>
+        </div>
+      </ng-container>
+    </div>
+    <div *ngIf="disabled">
+      <div *ngFor="let l of descData">
+        <h4 style="margin:0px">{{getLang(l.lang)}}</h4>
+        {{l.value}}
+      </div>
+
+    </div>
+  </ng-container>
+
+  <button class="add-button" mat-button (click)="addDesc()" *ngIf="!disabled">
+    <mat-icon>add</mat-icon> DESCRIPTION
+  </button>
+</div>

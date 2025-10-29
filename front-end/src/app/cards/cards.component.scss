@@ -1,0 +1,354 @@
+.wrapper {
+    background-color: var(--auxiliary-color-transparent);
+    height: calc(100vh - 76px);
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.wrapper > mat-card {
+    width: 200px;
+}
+
+.card {
+    background-color: var(--primary-color-transparent);
+    min-height: 150px;
+}
+
+.title {
+    color: var(--text-default-color);
+    display: flex;
+}
+
+::ng-deep .mat-card-header-text {
+    margin-left: 0px !important;
+}
+
+.desc {
+    color: var(--text-default-color);
+    max-width: 70%;
+}
+
+.button {
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+    color: var(--secondary-color);
+    background-color: var(--primary-color-transparent);
+}
+
+.action {
+    color: var(--text-inverse-color);
+    background-color: var(--auxiliary-color);
+    margin: 10px;
+    width: 200px;
+    display: flex;
+    justify-content: left;
+    text-align: left;
+}
+
+.action:disabled,
+.action[disabled] {
+    color: var(--text-inverse-color);
+    background-color: var(--warning-color-transparent);
+}
+
+::ng-deep .toast-success {
+    background-color: var(--auxiliary-color);
+}
+
+.reqIcon {
+    background-color: transparent;
+    border: transparent;
+    vertical-align: middle;
+    color: red;
+}
+
+.req-wrapper {
+    visibility: visible;
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    &:before{
+        content: "";
+        display: block;
+        background-color: white;
+        width: 20%;
+        height: 50%;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+    }
+    .reqIcon {
+        position: relative;
+    }
+}
+
+.info-icon {
+    color: var(--auxiliary-color);
+    background-color: transparent;
+    border: transparent;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.info-iconGray {
+    color: gray;
+    background-color: transparent;
+    border: transparent;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+.info-wrapper {
+    visibility: visible;
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    &:before{
+        content: "";
+        display: block;
+        background-color: white;
+        width: 50%;
+        height: 50%;
+        border-radius: 50%;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+    }
+    .info-icon {
+        position: relative;
+    }
+}
+
+.body {
+    display: flex;
+    height: 100%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.menu {
+    margin-right: 5px;
+    height: 100%;
+    width: 20%;
+    min-width: 300px;
+    background-color: var(--secondary-color);
+}
+
+.menu-mobile{
+    margin-right: 5px;
+}
+
+.cards {
+    margin: 10px;
+    height: calc(100vh - 172px);
+    width: 100%;
+}
+
+.mat-tab-body {
+    padding-top: 16px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.subtitle {
+    color: var(--primary-color);
+}
+
+.big-card {
+    background-color: var(--primary-color-transparent);
+    padding: 10px;
+}
+
+.buttons-container {
+    display: inline;
+}
+
+.purpose-item-card {
+    background-color: var(--primary-color-transparent);
+    margin: 10px;
+    min-height: 110px;
+}
+
+.button-item {
+    display: flex;
+    align-items: center;
+}
+
+.check-icon {
+    color: var(--auxiliary-color);
+    background-color: transparent;
+    border: transparent;
+    cursor: pointer;
+}
+
+.purpose-element-item {
+    padding-left: 3px;
+}
+
+.add-button {
+    background-color: var(--auxiliary-color);
+    color: var(--primary-color);
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.underlyingLppCard {
+    border-radius: 4px;
+    background-color: var(--primary-color-transparent);
+    padding: 20px;
+    margin-bottom: 10px;
+}
+
+.delete-button {
+    color: var(--auxiliary-color);
+    background-color: transparent;
+    border: transparent;
+    cursor: pointer;
+}
+  
+.delete-button-wrapper {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+::ng-deep .mat-tree {
+    background-color: var(--secondary-color);
+}
+
+.addUnderlyingPP-button {
+    border: transparent;
+    margin: 5px;
+}
+
+.addUnderlyingPP-button:hover {
+    cursor: pointer;
+}
+
+.tree {
+    max-height: 50%;
+    overflow: auto;
+    margin: 5px;
+    margin-top: 20px;
+}
+
+.tree-mobile {
+    max-height: 50%;
+    overflow: auto;
+    margin: 5px;
+    margin-top: 20px;
+    background-color: var(--auxiliary-color-transparent);
+}
+
+.node {
+    cursor: pointer;
+    width: 83%;
+}
+
+.addButton {
+    right: 0;
+    display: flex;
+}
+
+.policy-name {
+    padding: 10px 30px 10px 30px;
+    min-width: 50px;
+}
+
+.topLine {
+    display: flex;
+    justify-content: flex-start;
+    justify-content: space-between;
+}
+
+.reqIcon {
+    vertical-align: middle;
+    color: red;
+}
+
+.reqIconFilled {
+    vertical-align: middle;
+    color: blue;
+}
+
+.info-iconL {
+    color: var(--auxiliary-color);
+    background-color: transparent;
+    border: transparent;
+    vertical-align: middle;
+}
+
+.info-iconGrayL {
+    color: gray;
+    background-color: transparent;
+    border: transparent;
+    vertical-align: middle;
+}
+
+.mat-card-header {
+    justify-content: space-between;
+}
+
+.iconsWrap {
+    display: flex;
+}
+
+.loading {
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    top: calc(100vh / 2);
+}
+
+.loadingChild {
+    position: relative; 
+    left: 100%;
+    transform: translateX(-50%);
+}
+
+.waitingText {
+    color: black;
+}
+
+::ng-deep .mat-progress-bar-fill::after {
+    background-color: var(--auxiliary-color);
+}
+
+::ng-deep .mat-progress-bar-buffer {
+    background: white;
+}
+
+::ng-deep .mat-progress-bar {
+    border-radius: 100px !important;
+}
+
+.download {
+    display: flex;
+}
+
+.warnWrapper {
+    display: flex;
+    align-items: center;
+    padding-right: 15px;
+}
+
+.warn {
+    color: orange;
+    cursor: pointer;
+}
+
+.preview {
+    cursor: pointer;
+}

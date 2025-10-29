@@ -1,0 +1,81 @@
+<div>
+    <h4>Select/create data groups to cluster data for an improved overview of the policy towards the data-subject</h4>
+    <ng-container *ngFor="let icon of dgData; let i=index">
+
+        <div class="icons-icon">
+          <mat-checkbox class="check-box" [value]="icon.name"
+            [checked]="checked(icon.name)"
+            (change)="toggle($event, icon.name, i)">   
+            {{icon.name}}
+          </mat-checkbox>
+          <ejs-tooltip content='Edit data group' [mouseTrail]='true' [showTipPointer]='false'>
+            <mat-icon class="ic" (click)="edit(icon.name)">edit</mat-icon>
+          </ejs-tooltip>
+          <ejs-tooltip content='Delete data group' [mouseTrail]='true' [showTipPointer]='false'>
+            <mat-icon class="ic" (click)="delete(icon.name)">delete</mat-icon> 
+          </ejs-tooltip>
+        </div>
+
+        <div *ngIf="checked(icon.name)" class="desc-head">
+
+            <div class="scroll-box">
+              <ejs-tooltip [content]=getHeaderTooltipText(headerIsClicked.includes(i)) [mouseTrail]='true' [showTipPointer]='false'>
+                <h4 class="info" (click)="clickHeader(i)"
+                [ngStyle]="{'background-color': headerIsFilled.includes(i) ? 'var(--auxiliary-color-transparent)' : 'var(--warning-color)'}"> 
+                    Titles
+                    <span *ngIf="!headerIsClicked.includes(i)">
+                        <mat-icon>arrow_drop_down</mat-icon>
+                    </span>
+                    <span *ngIf="headerIsClicked.includes(i)">
+                        <mat-icon>arrow_drop_up</mat-icon>
+                    </span>
+                </h4>
+              </ejs-tooltip>
+              
+              <div class="border-div" *ngIf="headerIsClicked.includes(i)"> 
+                <app-ui-header
+                  [headers]="getHeader(icon.name)"
+                  [language]="language"
+                  (event)="addHeader($event, icon.name, i)">
+                </app-ui-header>
+              </div>
+
+            </div>
+
+            <div class="scroll-box">
+              <ejs-tooltip [content]=getDescTooltipText(descriptionIsClicked.includes(i)) [mouseTrail]='true' [showTipPointer]='false'>
+                <h4 class="info" (click)="clickDescription(i)"
+                [ngStyle]="{'background-color': descriptionIsFilled.includes(i) ? 'var(--auxiliary-color-transparent)' : 'var(--warning-color)'}"> 
+                    Descriptions
+                    <span *ngIf="!descriptionIsClicked.includes(i)">
+                        <mat-icon>arrow_drop_down</mat-icon>
+                    </span>
+                    <span *ngIf="descriptionIsClicked.includes(i)">
+                        <mat-icon>arrow_drop_up</mat-icon>
+                    </span>
+                </h4>
+              </ejs-tooltip>
+
+                <div class="border-div" *ngIf="descriptionIsClicked.includes(i)">
+                  <app-ui-description
+                    [descriptions]="getDescription(icon.name)"
+                    [language]="language"
+                    (event)="addDescription($event, icon.name, i)">
+                  </app-ui-description>
+                </div>    
+            </div>
+
+        </div>
+      
+    </ng-container>
+
+    <div class="custom-input">
+      <mat-form-field class="inputFieldGroupName">
+        <input [(ngModel)]="groupName" matInput placeholder="Enter group name" #input>
+      </mat-form-field>
+      <div class="add-icon">
+        <mat-icon class="addGroupIcon" (click)="addOrUpdateGroup(input.value)">add</mat-icon>
+      </div>
+    </div>
+
+</div>

@@ -1,0 +1,95 @@
+::ng-deep .mat-dialog-container {
+    height: 95vh;
+    width: 95vw;
+}
+  
+.form {
+    background-color: var(--secondary-color);
+    margin-bottom: 5px;
+    margin-top: 10px;
+    max-height: 70vh;
+    overflow: auto;
+}
+
+.top {
+    height: 55%;
+}
+
+.header {
+    background-color: var(--auxiliary-color-transparent);
+    padding: 5px;
+}
+
+.text {
+    margin: 20px;
+}
+
+.cansel-button {
+    float: right;
+    margin: 15px;
+    color: var(--text-inverse-color);
+    background-color: var(--auxiliary-color);
+    box-shadow: 2px 2px 2px 1px var(--secondary-color);
+}
+
+.button-wrapper {
+    bottom: 0px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.elv-header {
+    font-size: 14px;
+    background: var(--secondary-color);
+    cursor: pointer;
+    padding: 16px;
+    width: 100%;
+    border: none;
+    outline: none;
+    transition: 0.5s;
+    text-align: left;
+}
+
+.elv-header:after {
+    content: '\02795';
+    font-size: 12px;
+    float: right;
+    margin-right: 8px;
+}
+
+.elv-header-selected:after {
+    content: '\02796';
+    font-size: 12px;
+    float: right;
+    margin-right: 8px;
+}
+
+.elv-header:hover {
+    background-color: var(--auxiliary-color-transparent);
+}
+
+.elv-section {
+    overflow: hidden;
+    padding: 16px;
+    background-color: #fafafa;
+    border: none;
+    outline: none;
+    transition: 2s ease-out;
+    height: 100% !important;
+}
+
+.elv-headerEl {
+    font-size: 14px;
+    background: var(--secondary-color);
+    padding: 16px;
+    width: 100%;
+    border: none;
+    outline: none;
+    transition: 0.5s;
+    text-align: left;
+}

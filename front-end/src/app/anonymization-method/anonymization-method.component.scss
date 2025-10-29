@@ -1,0 +1,135 @@
+.form {
+    background-color: var(--secondary-color);
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+  
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+    color: var(--auxiliary-color) !important;
+}
+  
+::ng-deep .mat-focused .mat-form-field-underline .mat-form-field-ripple{
+    background-color: var(--auxiliary-color) !important;
+    color: var(--primary-color) !important;
+}
+  
+.save-button {
+    float: right;
+    margin: 15px;
+    color: var(--text-inverse-color);
+    background-color: var(--auxiliary-color);
+    box-shadow: 2px 2px 2px 1px var(--secondary-color);
+}
+
+.save-button:disabled {
+    border: 1px solid var(--primary-color);
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+.button-wrapper {
+    padding-bottom: 20px;
+    bottom: 0px;
+    margin-bottom: 30px;
+}
+
+.field {
+    width: 100%;
+}
+
+.scroll-box {
+    max-height: 400px;
+    overflow: auto;
+    padding: 5px;
+    width: 45%;
+}
+
+.border-div {
+    border: 0.5px solid var(--primary-color-transparent);
+    padding: 5px;
+}
+
+.desc-head {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.info {
+    width: 100%;
+    margin-block: 10px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    cursor: pointer;
+}
+
+.info:hover {
+    background-color: var(--auxiliary-color-transparent);
+}
+
+.data-header {
+    padding: 5px;
+    margin-bottom: 5px;
+    cursor: pointer;
+  }
+  
+.data-header:hover {
+    background-color: var(--auxiliary-color-transparent);
+}
+
+.data-text {
+    margin: 15px;
+}
+
+.border {
+    max-height: 400px;
+    overflow: auto;
+    border: 0.5px solid var(--primary-color-transparent);
+    padding: 10px;
+    margin-top: 10px;
+}
+
+.aux-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.aux-data-wrapper {
+    width: 49%;
+}
+
+.elv-header {
+    font-size: 14px;
+    background: var(--secondary-color);
+    cursor: pointer;
+    padding: 16px;
+    width: 100%;
+    border: none;
+    outline: none;
+    transition: 0.5s;
+    text-align: left;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+  
+  .elv-header:after {
+    content: '\02795';
+    font-size: 12px;
+    float: right;
+    margin-right: 8px;
+  }
+  
+  .elv-header-selected:after {
+    content: '\02796';
+    font-size: 12px;
+    float: right;
+    margin-right: 8px;
+  }
+  
+  .elv-header:hover {
+    background-color: var(--auxiliary-color-transparent);
+  }
+  
+  .view {
+    display: flex;
+  }

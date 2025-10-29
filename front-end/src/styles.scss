@@ -1,0 +1,234 @@
+/* You can add global styles to this file, and also import other style files */
+
+$material-design-icons-font-path: '~material-design-icons/iconfont/';
+@import '~material-design-icons/iconfont/material-icons.css';
+@import "../node_modules/@syncfusion/ej2-base/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-angular-navigations/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-inputs/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-buttons/styles/material.css";
+@import "~@ng-select/ng-select/themes/material.theme.css";
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+:root {
+    --primary-color: #52544D;
+    --primary-color-transparent: rgb(105, 103, 100, 0.6);
+    --secondary-color: #EEF1ED;
+    --auxiliary-color: #90B432;
+    --auxiliary-color-background: rgb(145, 172, 78);
+    --auxiliary-color-transparent: rgb(144, 180, 50, 0.5);
+    --warning-color: #F44336;
+    --warning-color-transparent: rgb(244, 67, 54, 0.5);
+    --text-default-color: white;
+    --text-inverse-color: black;
+    --fixed-color: rgba(160, 160, 160, 1);
+  }
+
+// ::-webkit-scrollbar {
+//   background-color: transparent; 
+// }
+
+body {
+  overflow-y: hidden;
+}
+
+mat-tab-group {
+  height: 100%;
+}
+
+.mat-tab-label {
+  width: 100%;
+}
+
+.representation {
+  padding-left: 16px;
+}
+
+.repDiv {
+  width: 100%;
+}
+
+.mat-tab-body .ng-star-inserted {
+  width: 100%;
+}
+
+.ng-input {
+  border-radius: 4px 4px 0 0;
+  padding: .75em .75em 0 .75em;
+}
+
+.ng-value-container {
+  border-radius: 4px 4px 0 0;
+  padding: .75em .75em 0 .75em;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--auxiliary-color-transparent); 
+    border: 7px solid transparent;
+    border-radius: 9px;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+.cat {
+  margin: 0px;
+}
+
+.check-box {
+  padding-bottom: 10px !important;
+  padding-top: 10px !important;
+}
+
+.mat-checkbox-layout {
+  display: inline !important;
+  white-space: unset !important;
+}
+
+.mat-tooltip {
+  font-size: 12px;
+  background-color: var(--primary-color);
+  max-width: 100% !important;
+}
+
+.e-control {
+  font-size: unset !important;
+}
+
+.e-tooltip-wrap .e-tip-content {
+  color: white;
+}
+
+.e-tooltip-wrap {
+  padding: 15px;
+  border-radius: 4px;
+  background-color: var(--primary-color);
+}
+
+.save-button {
+  float: right;
+  margin: 6px;
+  color: var(--text-inverse-color);
+  background-color: var(--auxiliary-color);
+  box-shadow: 2px 2px 2px 1px var(--secondary-color);
+}
+
+.warn-button {
+float: right;
+margin: 6px;
+color: var(--text-inverse-color);
+background-color: var(--warning-color);
+box-shadow: 2px 2px 2px 1px var(--secondary-color);
+}
+
+.cancel-button {
+float: right;
+margin: 6px;
+color: var(--text-inverse-color);
+background-color: var(--secondary-color);
+box-shadow: 2px 2px 2px 1px var(--secondary-color);
+}
+
+.save-button:disabled {
+border: 1px solid var(--primary-color);
+background-color: var(--secondary-color);
+color: var(--primary-color);
+}
+
+.ng-select.hd {
+  width: 180px;
+  .ng-select-container{
+    min-height: 34px;
+    .ng-value-container {
+      border-top-width: 0px;
+    }
+  }
+}
+
+.ng-select.ng-select-focused .ng-select-container::after {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: var(--auxiliary-color);
+}
+
+.ng-select .ng-select-container{
+  background-color: rgba(0,0,0,.04);
+}
+
+.mat-icon.hdl {
+  padding-top: 5px;
+}
+
+.mat-tab-body {
+  padding-top: 16px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.border-dg {
+  overflow-x: hidden !important;
+}
+
+.entity-text {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+}
+
+.ng-select .ng-select-container::after {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: rgba(0,0,0,.42);
+  transform: scale3d(1, 1.0001, 1);
+}
+
+.ng-select .ng-select-container .ng-value-container {
+  border-radius: 4px 4px 0 0;
+  padding: .75em .75em 0 .75em;
+  .ng-placeholder {
+  color: var(--auxiliary-color);
+}
+}
+
+.ng-select.ng-select-focused .ng-select-container .ng-value-container {
+  border-radius: 4px 4px 0 0;
+  padding: .75em .75em 0 .75em;
+  .ng-placeholder {
+  color: var(--auxiliary-color);
+  }
+}
+
+// .ng-select:required:invalid .ng-select-container::after {
+//   border-bottom-style: solid;
+//   border-bottom-width: 2px;
+//   border-bottom-color: var(--warning-color);
+// }
+
+ng-select.ng-invalid.ng-touched {
+  .ng-select-container::after{
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: var(--warning-color);
+  }
+  .ng-select-container .ng-value-container .ng-placeholder {
+    color: var(--warning-color);
+  }
+}
+ng-select.ng-invalid.ng-untouched {
+  .ng-select-container::after{
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: var(--warning-color);
+  }
+  .ng-select-container .ng-value-container .ng-placeholder {
+    color: var(--warning-color);
+  }
+}
+
+.mat-tab-label {
+  background-color: var(--primary-color-transparent);
+  opacity: .9 !important;
+}

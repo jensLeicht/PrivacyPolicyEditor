@@ -1,0 +1,148 @@
+<div [formGroup]="frmDataRecipient" class="content">
+
+  <div>
+    <ng-container formArrayName="dataRecipientList">
+      <div class="header">
+        <h2 class="text">
+          Data Recipient
+        </h2>
+        <div class="infIcWrapper">
+          <mat-icon class="infoIc" (click)="getInfo()">help</mat-icon>
+        </div>
+      </div>
+        <ng-container *ngFor="let dataRecipientForm of dataRecipientList.controls; let i = index">
+          <div class="view">
+            <button class="elv-header" (click)="viewList('El', i)" [class.elv-header-selected]="show('El', i)">
+              <mat-icon *ngIf= "!isDRComplete(i)" style="color: var(--warning-color);">
+                priority_high
+              </mat-icon>
+              {{getBoxText(i)}}
+            </button> 
+            <div class="delete-button-wrapper">
+              <button class="delete-button" (click)="deleteDataRecipient(i)">
+                <mat-icon>delete_forever</mat-icon>
+              </button>
+            </div>  
+          </div>
+          
+          <div *ngIf="show('El', i)">
+                
+              <div [formGroupName]="i">
+                      
+                    <mat-card class="form" ngNativeValidate>
+                      
+                      <div class="name-entity-wrapper">
+                        <div class="name-wrapper">
+                          <h3 class="representation">
+                            Recipient Information
+                          </h3>
+        
+                          <div class="checkbox-wrapper">
+                              <div class="double-body">
+                                <ejs-tooltip content='Transfers to this data recipient must be accepted by the data subject.' [mouseTrail]='true' [showTipPointer]='false'>
+                                  <mat-checkbox formControlName="required">   
+                                    required
+                                  </mat-checkbox>
+                                </ejs-tooltip>
+                              </div>
+                              <div class="double-body">
+                                <ejs-tooltip content='The data recipient resides outside the European Union.' [mouseTrail]='true' [showTipPointer]='false'>
+                                  <mat-checkbox formControlName="thirdCountryTransfer">   
+                                    third country transfer
+                                  </mat-checkbox>
+                                </ejs-tooltip>
+                              </div>
+                          </div>
+
+                          <div class="secondRow">
+                            <div class="checkbox-wrapper">
+                              <div class="double-body">
+                                <!-- <mat-form-field class="input-field" appearance="fill">
+                                  <mat-label>Country</mat-label>
+                                  <mat-select formControlName="country_old" matInput required placeholder="Select Country">
+                                    <mat-option *ngFor="let d of countryList" [value]="d.value">
+                                      {{d.viewValue}}
+                                      </mat-option>
+                                  </mat-select> -->
+                                  <ng-select formControlName="country" name="country" required placeholder="Country *">
+                                    <ng-option *ngFor="let d of countryList" [value]="d.value">
+                                      {{d.viewValue}}
+                                    </ng-option>
+                                  </ng-select>
+                                <!-- </mat-form-field>   -->
+
+                              </div>
+                              <div class="double-body" *ngIf="getThirdCountryTransferValue(i)">
+                                <ejs-tooltip content='This destination country falls under an adequaciy decision of the European Commission.' [mouseTrail]='true' [showTipPointer]='false'>
+                                  <mat-checkbox formControlName="adequacyDecision">   
+                                    adequacy decision
+                                  </mat-checkbox>
+                                </ejs-tooltip>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="entity-wrapper">
+                            <div class="border">
+                              <ejs-tooltip [content]=getSGTooltipText(safeguardIsClicked.includes(i)) [mouseTrail]='true' [showTipPointer]='false'>
+                                <div class="entity-header" (click)="clickSafeguard(i)"
+                                [ngStyle]="{'background-color': safeguardIsFilled(i) ? (safeguardIsEmpty(i) ? '' : 'var(--auxiliary-color-transparent)') : 'var(--warning-color)'}">
+                                    <h3 class="entity-text">
+                                        Safeguards (required in some cases)
+                                        <span *ngIf="!safeguardIsClicked.includes(i)">
+                                          <mat-icon>arrow_drop_down</mat-icon>
+                                        </span>
+                                        <span *ngIf="safeguardIsClicked.includes(i)">
+                                          <mat-icon>arrow_drop_up</mat-icon>
+                                        </span>
+                                    </h3>
+                                </div>
+                              </ejs-tooltip>
+                              <div *ngIf="safeguardIsClicked.includes(i)">
+                                <app-safeguard 
+                                  [dataRecipientObj]="getDataRecipients(i)"
+                                  [language]="defaultLanguage"
+                                  (newItemEvent)="addSafeguard($event, i)">
+                                </app-safeguard>
+                              </div>                    
+                            </div>                   
+                          </div>
+
+                        </div>
+                      </div>
+                    </mat-card>
+                    <mat-card class="form">
+                      <div class="name-entity-wrapper">
+                      <app-entity
+                        [inputObj]="getDataRecipients(i)"
+                        [language]="defaultLanguage"
+                        (newItemEvent)="addEntity($event, i)">
+                      </app-entity>
+                      
+                    </div>
+                          
+                    </mat-card>
+
+              </div>
+
+          </div>
+        </ng-container>
+    </ng-container>
+
+    <button class="add-button" mat-mini-fab (click)="addDataRecipient()">
+        <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <div class="button-wrapper">
+    <div class="support">
+      <ejs-tooltip class="errorMessage" *ngIf="!isDataComplete()" content='The entered data is incomplete. Click for information.' [mouseTrail]='true' [showTipPointer]='false'>
+        <mat-icon class="support_icon" (click)="getSupport()">warning</mat-icon> 
+        Information incomplete!
+      </ejs-tooltip>
+      <br/>
+      <button mat-button (click)="save()" [ngClass]="{'save-button': isDataComplete() , 'warn-button' : !isDataComplete()}" [disabled]="!edited">SAVE</button>
+      <button mat-button (click)="cancel()" class="cancel-button">CANCEL</button>
+    </div>
+  </div>
+</div>

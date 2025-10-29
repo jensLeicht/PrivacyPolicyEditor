@@ -1,0 +1,129 @@
+<div class="content">
+  <div>
+    <div class="header">
+      <h2 class="text">
+        Essential Information
+      </h2>
+      <div class="infIcWrapper">
+        <mat-icon class="infoIc" (click)="getInfo()">help</mat-icon>
+      </div>
+    </div>
+    
+    <mat-card class="form">
+      <h3>
+        Policy Information
+      </h3>
+      <form #info="ngForm" class="example-form" [formGroup]="frmPolicyName" ngNativeValidate>
+              
+          <div class="version-wrapper">
+            <h4 class="version-text">
+              LPL version
+            </h4>
+            <h4 class="version-number">
+              {{ frmPolicyName.value.version }}
+            </h4>
+          </div>
+        
+          <!-- <mat-form-field class="input-field" appearance="fill">
+            <mat-label>Policy language used</mat-label>
+            <mat-select formControlName="lang" required placeholder="Select language">
+                <mat-option *ngFor="let l of lang" [value]="l.value">
+                  {{l.viewValue}}
+                </mat-option>
+            </mat-select>
+          </mat-form-field> -->
+          <!-- <div *ngIf="!info.control.controls.lang.valid" class="invalid-feedback">
+            Please, select the primary language used for the privacy policy.
+          </div> -->
+          <ng-select  formControlName="lang" name="lang" required placeholder="Language used in the policy *">
+            <ng-option *ngFor="let l of lang" [value]="l.value">
+              {{l.viewValue}}
+            </ng-option>
+          </ng-select>
+    
+          <mat-form-field class="input-field" appearance="fill">
+              <mat-label>Policy name</mat-label>
+              <input matInput formControlName="name" required placeholder="Enter policy name">
+          </mat-form-field>
+    
+          <mat-form-field class="input-field" appearance="fill">
+              <mat-label>Policy URI (optional)</mat-label>
+              <input matInput formControlName="uri" placeholder="Enter policy URI">
+              <div class="message" *ngIf="!validateURL(frmPolicyName.value.uri)"> 
+                URI not valid
+              </div>
+          </mat-form-field>
+          
+      </form>
+    
+    </mat-card>
+
+    <mat-card class="form">
+      <h3>
+        UI-Representation of Policy Information
+      </h3>
+    <div class="desc-head">
+      <div class="scroll-box">
+        <ejs-tooltip [content]=getHeaderTooltipText() [mouseTrail]='true' [showTipPointer]='false'>
+          <h4 class="info" (click)="clickHeader()"
+          [ngStyle]="{'background-color': headerIsFilled ? 'var(--auxiliary-color-transparent)' : 'var(--warning-color)'}"> 
+              Titles
+              <span *ngIf="!headerIsClicked">
+                  <mat-icon>arrow_drop_down</mat-icon>
+              </span>
+              <span *ngIf="headerIsClicked">
+                  <mat-icon>arrow_drop_up</mat-icon>
+              </span>
+          </h4>
+        </ejs-tooltip>
+        
+        <div class="border-div" *ngIf="headerIsClicked"> 
+          <app-ui-header
+            [headers]="headerList"
+            [language]="frmPolicyName.value.lang"
+            (event)="addHeader($event)">
+          </app-ui-header>
+        </div>
+
+      </div>
+
+      <div class="scroll-box">
+        <ejs-tooltip [content]=getDescTooltipText() [mouseTrail]='true' [showTipPointer]='false'>
+          <h4 class="info" (click)="clickDescription()"
+          [ngStyle]="{'background-color': descriptionIsFilled ? 'var(--auxiliary-color-transparent)' : 'var(--warning-color)'}"> 
+              Descriptions
+              <span *ngIf="!descriptionIsClicked">
+                  <mat-icon>arrow_drop_down</mat-icon>
+              </span>
+              <span *ngIf="descriptionIsClicked">
+                  <mat-icon>arrow_drop_up</mat-icon>
+              </span>
+          </h4>
+        </ejs-tooltip>
+          
+          <div class="border-div" *ngIf="descriptionIsClicked">
+            <app-ui-description
+              [descriptions]="descriptionList"
+              [language]="frmPolicyName.value.lang"
+              (event)="addDescription($event)">
+            </app-ui-description>
+          </div>    
+      </div>
+
+    </div>
+  </mat-card>
+  </div>
+
+  <div class="button-wrapper">
+    <div class="support">
+      <ejs-tooltip class="errorMessage" *ngIf="!isDataComplete()" content='The entered data is incomplete. Click for information.' [mouseTrail]='true' [showTipPointer]='false'>
+        <mat-icon class="support_icon" (click)="getSupport()">warning</mat-icon> 
+        Information incomplete!
+      </ejs-tooltip>
+      <br/>
+      <button mat-button (click)="save()" [ngClass]="{'save-button': isDataComplete() , 'warn-button' : !isDataComplete()}" [disabled]="!isEdited()">SAVE</button>
+      <button mat-button (click)="cancel()" class="cancel-button">CANCEL</button>
+    </div>
+  </div>
+  
+</div>

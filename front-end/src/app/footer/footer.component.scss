@@ -1,0 +1,10 @@
+.container {
+    background-color: var(--primary-color);
+    height: 50px;
+}
+
+.container div {  
+    margin: 10px;
+    float: right;
+    color: var(--secondary-color);
+} 

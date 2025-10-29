@@ -1,0 +1,71 @@
+<div>
+       <h4>Select the most appropriate data categories that best classify the data</h4>
+        <ng-container *ngFor="let icon of dCategories; let i=index">
+  
+            <div class="icons-icon">
+              <mat-checkbox class="check-box cat" [value]="icon.value"
+                [checked]="icon.checked"
+                (change)="toggle($event, icon.value, i)">
+                <!-- [matTooltip]="icon.tip"
+                matTooltipPosition='above' -->
+                <!-- <ejs-tooltip [content]=icon.tip [mouseTrail]='true' [showTipPointer]='false'> -->
+                  <!-- <div class="cat"> -->
+                  <b>{{icon.viewValue}}</b>
+                  <br>
+                  <i class="cat">{{icon.tip}}</i>
+                <!-- </div> -->
+                <!-- </ejs-tooltip>                  -->
+              </mat-checkbox>
+            </div>
+  
+            <!-- <div *ngIf="checked(icon.value)" class="desc-head">
+  
+                <div class="scroll-box">
+                  <ejs-tooltip [content]=getHeaderTooltipText(headerIsClicked.includes(i)) [mouseTrail]='true' [showTipPointer]='false'>
+                    <h4 class="info" (click)="clickHeader(i)"
+                    [ngStyle]="{'background-color': headerIsFilled.includes(i) ? 'var(--auxiliary-color-transparent)' : ''}"> 
+                        Header List
+                        <span *ngIf="!headerIsClicked.includes(i)">
+                            <mat-icon>arrow_drop_down</mat-icon>
+                        </span>
+                        <span *ngIf="headerIsClicked.includes(i)">
+                            <mat-icon>arrow_drop_up</mat-icon>
+                        </span>
+                    </h4>
+                  </ejs-tooltip>
+                  
+                  <div class="border-div" *ngIf="headerIsClicked.includes(i)"> 
+                    <app-ui-header
+                      [headers]="getHeader(icon.value)"
+                      (event)="addHeader($event, icon.value, i)">
+                    </app-ui-header>
+                  </div>
+  
+                </div>
+  
+                <div class="scroll-box">
+                  <ejs-tooltip [content]=getDescTooltipText(descriptionIsClicked.includes(i)) [mouseTrail]='true' [showTipPointer]='false'>
+                    <h4 class="info" (click)="clickDescription(i)"
+                    [ngStyle]="{'background-color': descriptionIsFilled.includes(i) ? 'var(--auxiliary-color-transparent)' : ''}"> 
+                        Description List
+                        <span *ngIf="!descriptionIsClicked.includes(i)">
+                            <mat-icon>arrow_drop_down</mat-icon>
+                        </span>
+                        <span *ngIf="descriptionIsClicked.includes(i)">
+                            <mat-icon>arrow_drop_up</mat-icon>
+                        </span>
+                    </h4>
+                  </ejs-tooltip>
+
+                    <div class="border-div" *ngIf="descriptionIsClicked.includes(i)">
+                      <app-ui-description
+                        [descriptions]="getDescription(icon.value)"
+                        (event)="addDescription($event, icon.value, i)">
+                      </app-ui-description>
+                    </div>    
+                </div>
+  
+            </div> -->
+          
+        </ng-container>
+</div>

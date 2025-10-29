@@ -1,0 +1,140 @@
+.header {
+  padding: 5px;
+}
+
+.text {
+  margin: 15px;
+}
+
+.form {
+  background-color: var(--secondary-color);
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+ 
+.body {
+  display: flex;
+  justify-content: space-between;
+}
+
+.input-field {
+  width: 100%;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+  color: var(--auxiliary-color) !important;
+}
+
+::ng-deep .mat-focused .mat-form-field-underline .mat-form-field-ripple{
+  background-color: var(--auxiliary-color) !important;
+  color: var(--primary-color) !important;
+}
+
+.add-button {
+  background-color: var(--auxiliary-color);
+  color: var(--primary-color);
+  margin-left: 10px;
+}
+
+.add-button:disabled {
+  border: 1px solid var(--primary-color);
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+.delete-button {
+  color: var(--auxiliary-color);
+  background-color: transparent;
+  border: transparent;
+  cursor: pointer;
+}
+
+.delete-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 5px;
+}
+
+.add {
+  display: flex;
+  align-items: center;
+}
+
+.show {
+  padding-left: 20px;
+  padding-right: 10px;
+}
+
+.show-button {
+  padding-bottom: 10px;
+}
+
+.add-field {
+  display: flex;
+  justify-content: space-between;
+}
+
+.info {
+  width: 100%;
+  margin-block: 10px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  cursor: pointer;
+}
+
+.info:hover {
+  background-color: var(--auxiliary-color-transparent);
+}
+
+.name-wrapper {
+  padding-top: 23px;
+}
+
+.ui-info { 
+  width: 70%;
+  max-height: 400px;
+  overflow: auto;
+}
+
+.scroll-box {
+  max-height: 400px;
+  overflow: auto;
+  padding: 5px;
+  width: 45%;
+}
+
+.border-div {
+  border: 0.5px solid var(--primary-color-transparent);
+  padding: 5px;
+}
+
+.save-button {
+  float: right;
+  margin: 15px;
+  color: var(--text-inverse-color);
+  background-color: var(--auxiliary-color);
+  box-shadow: 2px 2px 2px 1px var(--secondary-color);
+}
+
+.save-button:disabled {
+  border: 1px solid var(--primary-color);
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+.button-wrapper {
+  padding-bottom: 20px;
+  bottom: 0px;
+  margin-bottom: 30px;
+}
+
+.desc-head {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}

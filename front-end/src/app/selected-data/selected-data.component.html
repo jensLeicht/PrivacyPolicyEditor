@@ -1,0 +1,64 @@
+<div class="content">
+  <div>
+    <ng-container>
+      <div class="header">
+        <h2 class="text">
+          {{name}} - Data
+        </h2>
+        <div class="infIcWrapper">
+          <mat-icon class="infoIc" (click)="getInfo()">help</mat-icon>
+        </div>
+      </div>
+      <ng-container>
+        <mat-card *ngIf="hasSubData" class="form">
+          <h3 class="text">
+            Data defined by subordinate purposes:
+          </h3>
+          <form>
+
+            <div *ngFor="let d of subData" class="main-wrapper">
+
+              <div>
+                {{d.name}}
+              </div>
+            </div>
+          </form>
+        </mat-card>
+        <mat-card class="form">
+          <div *ngIf="allDataList.length == 0">
+            Define new Data-elemets in the "Main Information"-tab to be able to select them here.
+          </div>
+          <h3 class="text" *ngIf="hasSubData">
+            Additional data:
+          </h3>
+          <form>
+
+            <div *ngFor="let d of allDataList, let i=index" class="main-wrapper">
+
+              <div>
+                <mat-checkbox class="check-box" [checked]="checked(d.value)" (change)="toggle($event, d.value)">
+                  {{d.viewValue}}
+                </mat-checkbox>
+              </div>
+            </div>
+          </form>
+        </mat-card>
+      </ng-container>
+    </ng-container>
+  </div>
+
+  <div class="button-wrapper">
+    <div class="support">
+      <ejs-tooltip class="errorMessage" *ngIf="!isDataComplete()"
+        content='The entered data is incomplete. Click for information.' [mouseTrail]='true' [showTipPointer]='false'>
+        <mat-icon class="support_icon" (click)="getSupport()">warning</mat-icon>
+        Information incomplete!
+      </ejs-tooltip>
+      <br />
+      <button mat-button (click)="save()"
+        [ngClass]="{'save-button': isDataComplete() , 'warn-button' : !isDataComplete()}"
+        [disabled]="!isEdited()">SAVE</button>
+      <button mat-button (click)="cancel()" class="cancel-button">CANCEL</button>
+    </div>
+  </div>
+</div>

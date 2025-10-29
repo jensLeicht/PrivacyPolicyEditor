@@ -1,0 +1,43 @@
+::ng-deep .mat-dialog-container {
+    height: 95vh;
+    width: 95vw;
+}
+  
+.form {
+    background-color: var(--secondary-color);
+    margin-bottom: 5px;
+    margin-top: 10px;
+    min-height: 100%;
+}
+
+.top {
+    height: 55%;
+}
+
+.header {
+    background-color: var(--auxiliary-color-transparent);
+    padding: 5px;
+}
+
+.text {
+    margin: 20px;
+}
+
+.cansel-button {
+    float: right;
+    margin: 15px;
+    color: var(--text-inverse-color);
+    background-color: var(--auxiliary-color);
+    box-shadow: 2px 2px 2px 1px var(--secondary-color);
+}
+
+.button-wrapper {
+    bottom: 0px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}

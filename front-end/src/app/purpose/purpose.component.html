@@ -1,0 +1,169 @@
+<div [formGroup]="frmPurpose" class="content">
+  <div>
+    <ng-container formArrayName="purposes">
+      <div class="header">
+        <h2 class="text">
+            Purpose(s)
+        </h2>
+        <div class="infIcWrapper">
+          <mat-icon class="infoIc" (click)="getInfo()">help</mat-icon>
+        </div>
+      </div>
+        <ng-container *ngFor="let purpose of purposes.controls; let i = index">
+
+          <div class="view">
+            <button class="elv-header" (click)="viewList('El', i)" [class.elv-header-selected]="show('El', i)">
+              <mat-icon *ngIf= "!isPurposeComplete(i)" style="color: var(--warning-color);">
+                priority_high
+              </mat-icon>
+              {{getBoxText(i)}}
+            </button> 
+            <div class="delete-button-wrapper">
+              <button class="delete-button" (click)="deletePurpose(i)">
+                <mat-icon>delete_forever</mat-icon>
+              </button>
+            </div> 
+          </div>
+          
+          <div *ngIf="show('El', i)">
+
+            <div [formGroupName]="i">
+                
+              <mat-card class="form">
+                <h3>
+                  Basic Information
+                </h3>
+                <!-- 
+                  <mat-form-field class="input-field" appearance="fill">
+                    <mat-label>Name</mat-label>
+                    <mat-select #matSelect formControlName="name" required placeholder="Choose purpose">
+                      <mat-option *ngFor="let d of pList" 
+                      [value]="d.value"
+                      [disabled]="isOptionDisabled(d.value, i)">
+                      {{d.viewValue}}
+                      </mat-option>
+                      
+                      <div class="custom-input">
+                        <mat-form-field>
+                          <input formControlName="customInput" matInput placeholder="Enter purpose name" #input>
+                        </mat-form-field>
+                        <div class="add-icon">
+                          <mat-icon (click)="addCategory(i, input.value)">add</mat-icon>
+                        </div>
+                      </div> 
+
+                    </mat-select>
+                  </mat-form-field>
+                  -->
+
+                  <mat-form-field class="input-field" appearance="fill">
+                    <mat-label>Purpose name (unique)</mat-label>
+                    <input matInput formControlName="name" required placeholder="Enter purpose name">
+                  </mat-form-field>
+
+                  <div class="checkbox-wrapper">
+                    <div class="double-body">
+                      <ejs-tooltip content='This purpose must be accepted by the data subject.' [mouseTrail]='true' [showTipPointer]='false'>
+                        <mat-checkbox formControlName="required">   
+                          required
+                        </mat-checkbox>
+                      </ejs-tooltip>
+                    </div>
+                    <div class="double-body">
+                      <ejs-tooltip content='This purpose is accepted automatically, but the data subject may opt out.' [mouseTrail]='true' [showTipPointer]='false'>
+                        <mat-checkbox formControlName="optOut">
+                          optOut
+                        </mat-checkbox>
+                      </ejs-tooltip>
+                    </div>
+                   <!--  <div class="double-body">
+                      <mat-label>Parent purpose</mat-label>
+                    <mat-select formControlName="parent">
+                      <mat-option
+                      [disabled]="isParentDisabled(d.value, i)"
+                      [value]="d.value"
+                      *ngFor="let d of purposesName" >
+                      {{d.viewValue}}
+                      </mat-option>                     
+                    </mat-select>
+                    </div> -->
+                  </div>         
+              </mat-card>
+              <mat-card class="form">
+                <h3>
+                  UI-Representation
+                </h3>
+              <div class="desc-head">
+
+                <div class="scroll-box">
+                  <ejs-tooltip [content]=getHeaderTooltipText(headerIsClicked.includes(i)) [mouseTrail]='true' [showTipPointer]='false'>
+                    <h4 class="info" (click)="clickHeader(i)"
+                    [ngStyle]="{'background-color': isHeaderReady(i) ? 'var(--auxiliary-color-transparent)' : 'var(--warning-color)'}"> 
+                        Titles
+                        <span *ngIf="!headerIsClicked.includes(i)">
+                            <mat-icon>arrow_drop_down</mat-icon>
+                        </span>
+                        <span *ngIf="headerIsClicked.includes(i)">
+                            <mat-icon>arrow_drop_up</mat-icon>
+                        </span>
+                    </h4>
+                  </ejs-tooltip>
+                  
+                  <div class="border-div" *ngIf="headerIsClicked.includes(i)"> 
+                    <app-ui-header
+                      [headers]="getHeader(i)"
+                      [language]="defaultLanguage"
+                      (event)="addHeader($event, i)">
+                    </app-ui-header>
+                  </div>
+                </div> 
+                
+                <div class="scroll-box">
+                  <ejs-tooltip [content]=getDescTooltipText(descriptionIsClicked.includes(i)) [mouseTrail]='true' [showTipPointer]='false'>
+                    <h4 class="info" (click)="clickDescription(i)"
+                    [ngStyle]="{'background-color': isDescriptionReady(i) ? 'var(--auxiliary-color-transparent)' : 'var(--warning-color)'}"> 
+                        Descriptions
+                        <span *ngIf="!descriptionIsClicked.includes(i)">
+                            <mat-icon>arrow_drop_down</mat-icon>
+                        </span>
+                        <span *ngIf="descriptionIsClicked.includes(i)">
+                            <mat-icon>arrow_drop_up</mat-icon>
+                        </span>
+                    </h4>
+                  </ejs-tooltip>
+
+                  <div class="border-div" *ngIf="descriptionIsClicked.includes(i)">
+                    <app-ui-description
+                      [descriptions]="getDescription(i)"
+                      [language]="defaultLanguage"
+                      (event)="addDescription($event, i)">
+                    </app-ui-description>
+                  </div>
+                </div>
+                   
+              </div>   
+            </mat-card>   
+               
+            </div>
+
+          </div>
+        </ng-container>
+    </ng-container>
+  
+    <button class="add-button" mat-mini-fab (click)="addPurpose()">
+        <mat-icon>add</mat-icon>
+    </button>
+  </div>
+    
+  <div class="button-wrapper">
+    <div class="support">
+      <ejs-tooltip class="errorMessage" *ngIf="!isDataComplete()" content='The entered data is incomplete. Click for information.' [mouseTrail]='true' [showTipPointer]='false'>
+        <mat-icon class="support_icon" (click)="getSupport()">warning</mat-icon> 
+        Information incomplete!
+      </ejs-tooltip>
+      <br/>
+      <button mat-button (click)="save()" [ngClass]="{'save-button': isDataComplete() , 'warn-button' : !isDataComplete()}" [disabled]="!edited">SAVE</button>
+      <button mat-button (click)="cancel()" class="cancel-button">CANCEL</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,455 @@
+<div class="wrapper">
+  <div class="body">
+
+    <div class="menu" *ngIf="!mobile">
+      <div class="buttons">
+        <div class="download">
+          <button mat-raised-button class="action" (click)="upload('mainPP')">
+            <mat-icon>folder_open</mat-icon>
+            LOAD Policy
+            <input id="mainPP" type="file" style="display:none" (change)="handle($event)">
+          </button>
+        </div>
+        <div class="download">
+          <button mat-raised-button class="action" (click)="upload('DFD')">
+            <mat-icon>folder_open</mat-icon>
+            IMPORT DFD
+            <input id="DFD" type="file" style="display:none" (change)="handle($event)">
+          </button>
+        </div>
+
+        <div class="download">
+          <button mat-raised-button class="action" (click)="export()">
+            <mat-icon>save</mat-icon>
+            SAVE Policy
+          </button>
+          <!-- <div *ngIf="!lppFilled()" class="warnWrapper">
+            <ejs-tooltip content='Policy is incomplete. Click here to get more information' [mouseTrail]='true' [showTipPointer]='false'>
+              <mat-icon class="warn" (click)="getWarnMessage()">warning</mat-icon>
+              <mat-icon class="warn" >warning</mat-icon>
+            </ejs-tooltip>           
+          </div> -->
+          <!-- <div class="warnWrapper">
+            <ejs-tooltip content='Generated policy preview' [mouseTrail]='true' [showTipPointer]='false'>
+              <mat-icon class="preview" (click)="getRawPolicy()">remove_red_eye</mat-icon>
+            </ejs-tooltip>
+          </div> -->
+        </div>
+
+        <div class="download">
+          <button mat-raised-button class="action" (click)="exportJSON()">
+            <mat-icon>get_app</mat-icon>
+            DOWNLOAD (json)
+          </button>
+          <div *ngIf="!lppFilled()" class="warnWrapper">
+            <ejs-tooltip content='Policy is incomplete. Click here to get more information' [mouseTrail]='true'
+              [showTipPointer]='false'>
+              <!-- <mat-icon class="warn" (click)="getWarnMessage()">warning</mat-icon> -->
+              <mat-icon class="warn">warning</mat-icon>
+            </ejs-tooltip>
+          </div>
+          <!-- <div class="warnWrapper">
+            <ejs-tooltip content='Generated policy preview' [mouseTrail]='true' [showTipPointer]='false'>
+              <mat-icon class="preview" (click)="getRawPolicy()">remove_red_eye</mat-icon>
+            </ejs-tooltip>
+          </div> -->
+        </div>
+
+        <div class="download">
+          <button mat-raised-button class="action" (click)="exportProlog()">
+            <mat-icon>get_app</mat-icon>
+            DOWNLOAD (prolog)
+          </button>
+        </div>
+
+        <div class="download">
+          <button mat-raised-button class="action" (click)="exportText()">
+            <mat-icon>description</mat-icon>
+            DOWNLOAD (text)
+          </button>
+        </div>
+
+        <div class="download">
+          <ejs-tooltip [content]="getComplianceTooltip()" [mouseTrail]='true' [showTipPointer]='false'>
+            <button mat-raised-button class="action" (click)="prologResponse()" [disabled]="!lppFilled()"
+              [style]="!compliant? checked?'background-color: var(--warning-color);' : lppFilled()? 'background-color: yellow' :'' :''">
+              <mat-icon *ngIf="checked && compliant">done</mat-icon>
+              <mat-icon *ngIf="!lppFilled() || !checked">help</mat-icon>
+              <mat-icon *ngIf="lppFilled() && checked && !compliant">clear</mat-icon>
+              Compliance Check
+            </button>
+          </ejs-tooltip>
+        </div>
+
+        <div class="download">
+          <button mat-raised-button class="action" (click)="reset()">
+            <mat-icon>delete</mat-icon>
+            RESET ALL
+          </button>
+        </div>
+
+      </div>
+
+      <!-- <div class="tree">
+        <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+          <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding class="node" (click)="selectPP(node.id)">
+            <button mat-icon-button disabled></button>
+            <h3 class="policy-name"
+            #tooltip="matTooltip"
+            matTooltip={{node.name}}
+            matTooltipPosition="above"
+            matTooltipHideDelay="1000"
+            [ngStyle]="{'background-color': isSelected(node.id) ? 'var(--auxiliary-color-transparent)' : ''}">
+              {{getPolicyName(node.name)}}
+        </h3>
+
+        <div class="addButton">
+
+          <ejs-tooltip content='Delete underlying policy' [mouseTrail]='true' [showTipPointer]='false'>
+            <button *ngIf="node.id != 0" class="addUnderlyingPP-button"
+            (click)="deleteUnderlyingPolicy(node.id)"
+            [ngStyle]="{'background-color': isSelected(node.id) ? 'rgb(144, 180, 50, 0.01)' : ''}">
+            <mat-icon>delete_outline</mat-icon>
+          </button> 
+          </ejs-tooltip>
+
+          <ejs-tooltip content='Upload underlying policy' [mouseTrail]='true' [showTipPointer]='false'>
+            <button *ngIf="!uppExists(node.id)" class="addUnderlyingPP-button"
+              (click)="upload('underlyingPP')"
+              [ngStyle]="{'background-color': isSelected(node.id) ? 'rgb(144, 180, 50, 0.01)' : ''}">
+              <mat-icon>publish</mat-icon>
+              <input id="underlyingPP" type="file" style="display:none" (change)="handleUploadingUP($event, node.id)">
+            </button>
+          </ejs-tooltip>
+
+          <ejs-tooltip content='Add underlying policy' [mouseTrail]='true' [showTipPointer]='false'>
+            <button *ngIf="!uppExists(node.id)" class="addUnderlyingPP-button"
+            (click)="addUnderlyingPolicy(node.id)"
+            [ngStyle]="{'background-color': isSelected(node.id) ? 'rgb(144, 180, 50, 0.01)' : ''}">
+            <mat-icon>add</mat-icon>
+          </button>
+          </ejs-tooltip>
+        
+        </div>
+            
+          </mat-tree-node>
+          <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding class="node" (click)="selectPP(node.id)">
+            <button mat-icon-button matTreeNodeToggle
+                    [attr.aria-label]="'Toggle ' + node.name">
+              <mat-icon class="mat-icon-rtl-mirror">
+                {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+              </mat-icon>
+            </button>
+            <h3 class="policy-name"
+            #tooltip="matTooltip"
+            matTooltip={{node.name}}
+            matTooltipPosition="above"
+            matTooltipHideDelay="1000"
+            [ngStyle]="{'background-color': isSelected(node.id) ? 'var(--auxiliary-color-transparent)' : ''}">
+              {{getPolicyName(node.name)}}
+          </h3>
+          <div class="addButton">
+            <ejs-tooltip content='Delete underlying policy' [mouseTrail]='true' [showTipPointer]='false'>
+              <button *ngIf="node.id != 0" class="addUnderlyingPP-button"
+                (click)="deleteUnderlyingPolicy(node.id)"
+                [ngStyle]="{'background-color': isSelected(node.id) ? 'rgb(144, 180, 50, 0.01)' : ''}">
+                <mat-icon>delete_outline</mat-icon>
+              </button> 
+            </ejs-tooltip>
+
+          <ejs-tooltip content='Upload underlying policy' [mouseTrail]='true' [showTipPointer]='false'>
+            <button *ngIf="!uppExists(node.id)" class="addUnderlyingPP-button"
+              (click)="upload('underlyingPP')"
+              [ngStyle]="{'background-color': isSelected(node.id) ? 'rgb(144, 180, 50, 0.01)' : ''}">
+              <mat-icon>publish</mat-icon>
+              <input id="underlyingPP" type="file" style="display:none" (change)="handleUploadingUP($event, node.id)">
+            </button>
+          </ejs-tooltip>
+          
+            <button *ngIf="!uppExists(node.id)" class="addUnderlyingPP-button"
+            (click)="addUnderlyingPolicy(node.id)"
+            #tooltip="matTooltip"
+            matTooltip="Add policy"
+            matTooltipPosition="above"
+            matTooltipHideDelay="1000"
+            [ngStyle]="{'background-color': isSelected(node.id) ? 'rgb(144, 180, 50, 0.01)' : ''}">
+            <mat-icon>add</mat-icon>
+          </button> 
+
+          </div>
+            
+          </mat-tree-node>
+        </mat-tree>
+      </div> -->
+
+    </div>
+
+    <div class="loading" *ngIf="loading">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      <div class="loadingChild">
+        <h3 class="waitingText">Please wait ...</h3>
+      </div>
+    </div>
+
+    <div class="cards">
+      <div class="topLine">
+        <div>
+          <h3 *ngIf="!currentLpp.name">Unnamed Privacy Policy</h3>
+          <h3>{{currentLpp.name}}</h3>
+        </div>
+        <div class="legend">
+          <div>
+            <mat-icon class="info-iconL">help</mat-icon>/<mat-icon class="info-iconGrayL">help</mat-icon> - additional
+            information
+          </div>
+          <div>
+            <mat-icon class="reqIcon">priority_high</mat-icon> - element required for a valid policy
+          </div>
+          <div>
+            <mat-icon class="reqIconFilled">priority_high</mat-icon> - required element filled
+          </div>
+
+        </div>
+
+      </div>
+      <mat-tab-group>
+        <mat-tab class="scrollTab">
+          <ng-template mat-tab-label>
+            <mat-icon style="color: var(--warning-color); padding-right: 15px;"
+              [style.visibility]="!mainComplete? 'visible': 'hidden'">
+              warning
+            </mat-icon>
+            <mat-icon style="color: var(--auxiliary-color);  padding-right: 15px;" *ngIf="mainComplete">
+              check_circle
+            </mat-icon>
+            Main Information
+          </ng-template>
+          <!-- <h4 class="subtitle"> General information </h4>   -->
+
+          <div fxLayout="row wrap" fxLayoutGap="16px grid">
+            <div fxFlex="25" fxFlex.md="33" fxFlex.sm="50" fxFlex.xs="100" *ngFor="let step of steps">
+              <mat-card class="big-card">
+                <mat-card class="card"
+                  [ngStyle]="{'background-color': isFilled(step) ? (isComplete(step) ? 'var(--auxiliary-color-background)' : 'var(--warning-color-transparent)') : ''}">
+                  <mat-card-header>
+                    <mat-card-title class="title">
+                      <mat-icon class="customIcon" svgIcon={{step.icon}}></mat-icon>
+                      {{step.name}}
+                    </mat-card-title>
+                    <div class="iconsWrap">
+                      <div class="info-wrapper">
+                        <mat-icon class="info-icon" (click)="getInfo(step, 'g')"
+                          [ngStyle]="{'color': isFilled(step) ? 'grey' : ''}">
+                          help</mat-icon>
+                      </div>
+                      <div *ngIf="step.req">
+                        <mat-icon class="reqIcon" [ngStyle]="{'color': isComplete(step) ? 'blue' : ''}">
+                          priority_high</mat-icon>
+                      </div>
+                    </div>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <p class="desc">
+                      {{ step.description }}
+                    </p>
+                  </mat-card-content>
+                  <mat-card-actions>
+                    <button mat-raised-button class="button" (click)="edit(step)">{{getEditText(step, -1)}}</button>
+                  </mat-card-actions>
+                </mat-card>
+              </mat-card>
+
+            </div>
+          </div>
+        </mat-tab>
+        <mat-tab class="scrollTab">
+          <ng-template mat-tab-label>
+            <mat-icon style="color: var(--warning-color); padding-right: 15px;"
+              [style.visibility]="!purposesComplete? 'visible': 'hidden'">
+              warning
+            </mat-icon>
+            <mat-icon style="color: var(--auxiliary-color);  padding-right: 15px;" *ngIf="purposesComplete">
+              check_circle
+            </mat-icon>
+            Purpose Details
+          </ng-template>
+          <!-- <h4 class="subtitle"> Purposes </h4> -->
+          <div *ngIf="currentPurposesList.length == 0">
+            Define new purposes in the "Main Information"-tab to be able to edit them here.
+          </div>
+          <div fxLayout="row wrap" fxLayoutGap="16px grid" *ngIf="currentPurposesList.length > 0">
+            <div fxFlex="33" fxFlex.md="50" fxFlex.sm="100" fxFlex.xs="100"
+              *ngFor="let purpose of currentPurposesList; let i = index">
+              <mat-card class="big-card">
+                <mat-card-header (click)="clickPurpose(i)" class="topLine">
+                  <mat-card-title class="title" style="margin-bottom: 0px;">
+                    <span [style.visibility]="purposeIsComplete.includes(i)? 'hidden': 'visible'">
+                      <mat-icon style="color: var(--warning-color); padding-right: 15px;">
+                        warning
+                      </mat-icon>
+                    </span>
+                    {{purpose.name}}
+                  </mat-card-title>
+                  <div>
+                    <span [style.visibility]="purposeIsComplete.includes(i)? 'visible': 'hidden'">
+                      <mat-icon style="color: greenyellow;">
+                        done
+                      </mat-icon>
+                    </span>
+                    <span [style.display]="purposeHasChildren.includes(i)? 'inline-block': 'none'">
+                      <mat-icon class="customIcon" svgIcon="superPurpose"></mat-icon>
+                    </span>
+                    <span [style.display]="purposeIsSubPurpose.includes(i)? 'inline-block': 'none'">
+                      <mat-icon class="customIcon" svgIcon="subPurpose"></mat-icon>
+                    </span>
+                    <span *ngIf="!purposeIsClicked.includes(i)">
+                      <mat-icon>arrow_drop_down</mat-icon>
+                    </span>
+                    <span *ngIf="purposeIsClicked.includes(i)">
+                      <mat-icon>arrow_drop_up</mat-icon>
+                    </span>
+                  </div>
+                </mat-card-header>
+                <div *ngIf="purposeIsClicked.includes(i)">
+                  <div *ngFor="let item of purposeItems">
+
+                    <mat-card class="purpose-item-card "
+                      [ngStyle]="{'background-color': isPurposeItemFilled(purpose, item.label) ? isPurposeItemComplete(purpose, item.label) ? 'var(--auxiliary-color-background)' : 'var(--warning-color-transparent)' : ''}">
+                      <mat-card-header>
+                        <mat-card-title class="title">
+                          <mat-icon class="customIcon" svgIcon={{item.icon}} style="padding-right: 15px;"></mat-icon>
+                          {{item.name}}
+                        </mat-card-title>
+
+                        <div class="iconsWrap">
+                          <div class="info-wrapper">
+                            <mat-icon class="info-icon" (click)="getInfo(item, 'p')"
+                              [ngStyle]="{'color': isPurposeItemFilled(purpose, item.label) ? 'grey' : ''}">
+                              info</mat-icon>
+                          </div>
+                          <div *ngIf="item.req">
+                            <mat-icon class="reqIcon"
+                              [ngStyle]="{'color': isPurposeItemComplete(purpose, item.label) ? 'blue' : ''}">
+                              priority_high</mat-icon>
+                          </div>
+                        </div>
+
+                      </mat-card-header>
+                      <mat-card-content>
+                        <p class="desc">
+                          {{ item.description }}
+                        </p>
+                      </mat-card-content>
+                      <mat-card-actions>
+                        <button mat-raised-button class="button" (click)="addPurposeItem(i, item)">{{getEditText(item,
+                          i)}}</button>
+                      </mat-card-actions>
+                    </mat-card>
+
+                  </div>
+                </div>
+
+              </mat-card>
+            </div>
+          </div>
+        </mat-tab>
+        <!-- <mat-tab label="..."> Content 3 </mat-tab> -->
+      </mat-tab-group>
+
+
+      <div class="menu-mobile" *ngIf="mobile">
+        <div class="buttons">
+          <button mat-raised-button class="action" (click)="upload('mainPP')">
+            <mat-icon>publish</mat-icon>
+            UPLOAD
+            <input id="mainPP" type="file" style="display:none" (change)="handle($event)">
+          </button>
+          <button mat-raised-button class="action" (click)="export()">
+            <mat-icon>get_app</mat-icon>
+            DOWNLOAD (XML)
+          </button>
+          <button mat-raised-button class="action">
+            <mat-icon>get_app</mat-icon>
+            DOWNLOAD (PROLOG)
+          </button>
+          <button mat-raised-button class="action" (click)="reset()">
+            <mat-icon>clear</mat-icon>
+            RESET
+          </button>
+
+        </div>
+
+        <div class="tree-mobile">
+          <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+            <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding class="node" (click)="selectPP(node.id)"
+              [ngStyle]="{'background-color': isSelected(node.id) ? 'var(--auxiliary-color-transparent)' : ''}">
+              <button mat-icon-button disabled></button>
+              <h3 class="policy-name" #tooltip="matTooltip" matTooltip={{node.name}} matTooltipPosition="above"
+                matTooltipHideDelay="1000">
+                {{getPolicyName(node.name)}}
+              </h3>
+              <!-- <div class="addButton">
+            <button class="addUnderlyingPP-button"
+            (click)="addUnderlyingPolicy(node.id)"
+            #tooltip="matTooltip"
+            matTooltip="Add underlying policy"
+            matTooltipPosition="above"
+            matTooltipHideDelay="1000"
+            [ngStyle]="{'background-color': isSelected(node.id) ? 'rgb(144, 180, 50, 0.01)' : ''}">
+            <mat-icon>add</mat-icon>
+          </button>
+  
+          <ejs-tooltip content='Delete underlying policy' [mouseTrail]='true' [showTipPointer]='false'>
+            <button *ngIf="node.id != 0" class="addUnderlyingPP-button"
+            (click)="deleteUnderlyingPolicy(node.id)"
+            [ngStyle]="{'background-color': isSelected(node.id) ? 'rgb(144, 180, 50, 0.01)' : ''}">
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+          </ejs-tooltip> 
+          
+          </div> -->
+
+            </mat-tree-node>
+            <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding class="node"
+              (click)="selectPP(node.id)"
+              [ngStyle]="{'background-color': isSelected(node.id) ? 'var(--auxiliary-color-transparent)' : ''}">
+              <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
+                <mat-icon class="mat-icon-rtl-mirror">
+                  {{treeControl.isExpanded(node) ? 'expand_more' : 'chevron_right'}}
+                </mat-icon>
+              </button>
+              <h3 class="policy-name" #tooltip="matTooltip" matTooltip={{node.name}} matTooltipPosition="above"
+                matTooltipHideDelay="1000">
+                {{getPolicyName(node.name)}}
+              </h3>
+              <!-- <div class="addButton">
+              <button class="addUnderlyingPP-button"
+              (click)="addUnderlyingPolicy(node.id)"
+              #tooltip="matTooltip"
+              matTooltip="Add policy"
+              matTooltipPosition="above"
+              matTooltipHideDelay="1000"
+              [ngStyle]="{'background-color': isSelected(node.id) ? 'rgb(144, 180, 50, 0.01)' : ''}">
+              <mat-icon>add</mat-icon>
+            </button> 
+  
+            <ejs-tooltip content='Delete underlying policy' [mouseTrail]='true' [showTipPointer]='false'>
+              <button *ngIf="node.id != 0" class="addUnderlyingPP-button"
+                (click)="deleteUnderlyingPolicy(node.id)"
+                [ngStyle]="{'background-color': isSelected(node.id) ? 'rgb(144, 180, 50, 0.01)' : ''}">
+                <mat-icon>delete_outline</mat-icon>
+              </button> 
+            </ejs-tooltip>
+            
+            </div> -->
+
+            </mat-tree-node>
+          </mat-tree>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>

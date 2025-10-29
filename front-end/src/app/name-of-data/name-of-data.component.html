@@ -1,0 +1,19 @@
+<div>
+    <ng-container>
+        <ng-container>
+            <div class="body"> 
+                <div class="body-content">
+                    <mat-form-field class="input-field" appearance="fill">
+                        <mat-label>Data</mat-label>
+                        <mat-select [formControl]="selectedOptions" multiple matInput required placeholder="Choose data name">
+                            <mat-option *ngFor="let d of data" [value]="d.value">
+                            {{d.viewValue}}
+                            </mat-option>
+                          </mat-select>
+                    </mat-form-field>  
+                </div>                                                      
+            </div>
+              
+        </ng-container>
+    </ng-container>
+</div>

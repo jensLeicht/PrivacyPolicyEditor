@@ -1,0 +1,21 @@
+<div class="content">
+    <div>
+      <div class="top">
+        <div class="header">
+          <h2 class="text">
+            The following fields are incomplete:
+          </h2>
+        </div>
+        
+        <mat-card class="form">
+            <p *ngFor="let part of infoText" [innerHTML]="part"></p>
+          
+        </mat-card>
+      </div>
+    </div>
+  
+    <div class="button-wrapper">
+      <button mat-button (click)="close()" class="cansel-button">CLOSE</button>
+    </div>
+    
+  </div>
